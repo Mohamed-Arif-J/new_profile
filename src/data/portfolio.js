@@ -18,7 +18,7 @@ export const portfolio = {
   ],
   metrics: [
     { value: 9.47, isFloat: true, label: 'Current CGPA', suffix: '' },
-    { value: 5, isFloat: false, label: 'Selected Projects', suffix: '+' },
+    { value: 8, isFloat: false, label: 'Selected Projects', suffix: '+' },
     { value: 9.7, isFloat: true, label: 'HSC Grade', suffix: '' },
   ],
   about: {
@@ -70,6 +70,25 @@ export const portfolio = {
       ],
     },
     {
+      id: 'rageware-os',
+      title: 'RageWare OS',
+      tagline: 'Retro 90s Web Operating System',
+      image: '/assets/projects/rageware.svg',
+      accent: '#f59e0b',
+      accentClass: 'accent-amber',
+      category: 'Web OS & Retro UI',
+      features: [
+        'Interactive in-browser retro 1990s desktop operating system simulation with AltF4 shell.',
+        'Virtual window manager with draggable apps, vintage audio effects, and classic games.',
+        'Custom built-in Webamp player, file explorer, and CRT scanline shader engine.',
+      ],
+      tech: ['JavaScript', 'React', 'Tailwind CSS', 'Vite', 'Web Audio'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/RageWare_OS', type: 'github' },
+        { label: 'Live Demo', href: 'https://rage-ware-os.vercel.app', type: 'external' },
+      ],
+    },
+    {
       id: 'fake-review-detector',
       title: 'Fake Review Detector',
       tagline: 'NLP Fraud Analysis',
@@ -85,6 +104,24 @@ export const portfolio = {
       tech: ['Python', 'Flask', 'Scikit-learn', 'Selenium', 'Random Forest'],
       links: [
         { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/Fake-review-detector', type: 'github' },
+      ],
+    },
+    {
+      id: 'screen-addiction-gbdt',
+      title: 'Screen Addiction GBDT Pipeline',
+      tagline: 'Behavioral Analytics & ML Pipeline',
+      image: '/assets/projects/screen-addiction.svg',
+      accent: '#a855f7',
+      accentClass: 'accent-purple',
+      category: 'Machine Learning & Analytics',
+      features: [
+        'Predictive modeling using Gradient Boosted Decision Trees (LightGBM) to analyze digital screen usage habits.',
+        'Feature engineering and behavioral clustering with 91.8% precision across multi-platform pickup metrics.',
+        'Comprehensive ROC-AUC evaluation and automated behavioral habit report generation.',
+      ],
+      tech: ['Python', 'LightGBM', 'Scikit-learn', 'Pandas', 'Data Science'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/screen-addiction-gbdt-pipeline', type: 'github' },
       ],
     },
     {
@@ -104,6 +141,25 @@ export const portfolio = {
       links: [
         { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/Smart-hostel-management-sys', type: 'github' },
         { label: 'Download', href: 'https://drive.google.com/drive/folders/1QXmmbxg7LD5o4LVFVh4FGrN7AXlhxWyM', type: 'download' },
+      ],
+    },
+    {
+      id: 'firefly-web',
+      title: 'Firefly',
+      tagline: 'Modern TypeScript Web Platform',
+      image: '/assets/projects/firefly.svg',
+      accent: '#ec4899',
+      accentClass: 'accent-pink',
+      category: 'Full-Stack Web',
+      features: [
+        'Modern responsive web platform engineered with TypeScript, React, and modular design tokens.',
+        'Edge performance optimization with lightning-fast routing and automated CI/CD pipeline on Vercel.',
+        'Interactive real-time data streaming dashboard with dynamic responsive visuals.',
+      ],
+      tech: ['TypeScript', 'React', 'Tailwind CSS', 'Vite', 'Vercel'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/firefly', type: 'github' },
+        { label: 'Live Demo', href: 'https://firefly-lilac-alpha.vercel.app', type: 'external' },
       ],
     },
     {

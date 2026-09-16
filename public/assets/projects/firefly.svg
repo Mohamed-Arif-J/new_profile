@@ -1,0 +1,93 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="fireflyBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0c16"/>
+      <stop offset="50%" stop-color="#141126"/>
+      <stop offset="100%" stop-color="#0c0a18"/>
+    </linearGradient>
+    <linearGradient id="neonPink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f43f5e"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="url(#fireflyBg)"/>
+
+  <!-- Radial Glow Accents -->
+  <circle cx="150" cy="120" r="140" fill="#ec4899" opacity="0.15" filter="url(#glow)"/>
+  <circle cx="680" cy="360" r="160" fill="#8b5cf6" opacity="0.12" filter="url(#glow)"/>
+
+  <!-- Main Web App Mockup Frame -->
+  <g transform="translate(40, 35)">
+    <rect width="720" height="410" rx="18" fill="#111322" stroke="rgba(236,72,153,0.3)" stroke-width="1.5" filter="drop-shadow(0 20px 50px rgba(0,0,0,0.6))"/>
+    
+    <!-- Browser Top Bar -->
+    <rect width="720" height="42" rx="18" fill="#17192d"/>
+    <rect y="24" width="720" height="18" fill="#17192d"/>
+    <circle cx="28" cy="21" r="5" fill="#ef4444"/>
+    <circle cx="44" cy="21" r="5" fill="#eab308"/>
+    <circle cx="60" cy="21" r="5" fill="#22c55e"/>
+
+    <!-- URL Bar -->
+    <rect x="180" y="9" width="360" height="24" rx="12" fill="#0c0e1a" stroke="rgba(255,255,255,0.08)"/>
+    <text x="360" y="25" font-family="monospace" font-size="11" fill="#94a3b8" text-anchor="middle">https://firefly-lilac-alpha.vercel.app</text>
+
+    <!-- Sidebar -->
+    <rect x="0" y="42" width="160" height="368" fill="#131525"/>
+    <text x="24" y="80" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="900" fill="#f43f5e">🔥 FIREFLY</text>
+    
+    <!-- Nav items -->
+    <rect x="16" y="105" width="128" height="32" rx="8" fill="rgba(236,72,153,0.15)" stroke="rgba(236,72,153,0.4)" stroke-width="1"/>
+    <text x="32" y="126" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#f472b6">⚡ Overview</text>
+    <text x="32" y="166" font-family="'Segoe UI', sans-serif" font-size="12" fill="#94a3b8">📊 Analytics</text>
+    <text x="32" y="206" font-family="'Segoe UI', sans-serif" font-size="12" fill="#94a3b8">🚀 Deployments</text>
+    <text x="32" y="246" font-family="'Segoe UI', sans-serif" font-size="12" fill="#94a3b8">⚙️ Settings</text>
+
+    <!-- Content Area -->
+    <g transform="translate(180, 60)">
+      <text x="0" y="24" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="800" fill="#ffffff">Platform Activity &amp; Live Feeds</text>
+      <text x="0" y="44" font-family="'Segoe UI', sans-serif" font-size="12" fill="#64748b">TypeScript • React • Tailwind • Vercel Edge Network</text>
+
+      <!-- Stat Cards -->
+      <g transform="translate(0, 65)">
+        <rect width="160" height="85" rx="12" fill="#191c32" stroke="rgba(255,255,255,0.06)"/>
+        <text x="16" y="28" font-family="monospace" font-size="10" fill="#94a3b8">THROUGHPUT</text>
+        <text x="16" y="58" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="bold" fill="#ec4899">4.8k req/s</text>
+      </g>
+
+      <g transform="translate(175, 65)">
+        <rect width="160" height="85" rx="12" fill="#191c32" stroke="rgba(255,255,255,0.06)"/>
+        <text x="16" y="28" font-family="monospace" font-size="10" fill="#94a3b8">EDGE LATENCY</text>
+        <text x="16" y="58" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="bold" fill="#38bdf8">14 ms</text>
+      </g>
+
+      <g transform="translate(350, 65)">
+        <rect width="160" height="85" rx="12" fill="#191c32" stroke="rgba(255,255,255,0.06)"/>
+        <text x="16" y="28" font-family="monospace" font-size="10" fill="#94a3b8">UPTIME</text>
+        <text x="16" y="58" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="bold" fill="#10b981">99.98%</text>
+      </g>
+
+      <!-- Wave Graph Banner -->
+      <g transform="translate(0, 170)">
+        <rect width="510" height="155" rx="14" fill="#17192f" stroke="rgba(255,255,255,0.06)"/>
+        <text x="18" y="28" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#f8fafc">Live Traffic &amp; Edge Sync Stream</text>
+        
+        <!-- Smooth Neon Curve -->
+        <path d="M 20 120 C 60 110, 110 50, 160 80 C 210 110, 260 40, 310 70 C 360 100, 420 30, 490 60" fill="none" stroke="url(#neonPink)" stroke-width="3.5"/>
+        <path d="M 20 130 C 60 125, 110 90, 160 110 C 210 130, 260 70, 310 95 C 360 120, 420 60, 490 90" fill="none" stroke="url(#neonCyan)" stroke-width="2" opacity="0.6"/>
+      </g>
+    </g>
+  </g>
+</svg>

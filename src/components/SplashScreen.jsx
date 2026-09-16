@@ -16,10 +16,10 @@ export default function SplashScreen({ done }) {
       return () => clearTimeout(exitTimer);
     }
 
-    // Step pacing inspired by Skiper15
-    const delays = [170, 170, 90, 170, 170, 90, 200, 170, 170, 300];
+    // Step pacing totaling ~8.9s (matching 8-10 second user requirement)
+    const delays = [820, 850, 780, 920, 860, 890, 840, 950, 880, 1100];
     const step = Math.floor(progress / 10);
-    const delay = delays[step] || 150;
+    const delay = delays[step] || 850;
 
     const timer = setTimeout(() => {
       setProgress((p) => Math.min(100, p + 10));
@@ -73,6 +73,7 @@ export default function SplashScreen({ done }) {
               <motion.div
                 drag
                 dragMomentum={false}
+                dragConstraints={{ left: -120, right: 120, top: -140, bottom: 140 }}
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -103,6 +104,7 @@ export default function SplashScreen({ done }) {
               <motion.div
                 drag
                 dragMomentum={false}
+                dragConstraints={{ left: -120, right: 120, top: -140, bottom: 140 }}
                 initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
                 animate={{ opacity: 1, scale: 1, rotate: 6 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -122,7 +124,7 @@ export default function SplashScreen({ done }) {
                   <p>
                     AI Software Engineer & Full-Stack Architect building intelligent applications and deep learning models.
                   </p>
-                  <p className="skiper15-note-mono">B.Tech CSE • CGPA 9.47</p>
+                  <p className="skiper15-note-mono">B.Tech CSE</p>
                 </div>
               </motion.div>
             )}
@@ -134,6 +136,7 @@ export default function SplashScreen({ done }) {
               <motion.div
                 drag
                 dragMomentum={false}
+                dragConstraints={{ left: -120, right: 120, top: -140, bottom: 140 }}
                 initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
                 animate={{ opacity: 1, scale: 1, rotate: -6 }}
                 exit={{ opacity: 0, scale: 0.8 }}

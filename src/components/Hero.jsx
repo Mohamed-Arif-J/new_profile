@@ -54,35 +54,34 @@ export default function Hero({ lenis }) {
         },
       });
 
-      // Multi-layered depth parallax:
-      // - Background image scales up and sinks with cinematic velocity
-      // - Left-center name accelerates upward and fades
-      // - Bottom left & bottom right drift down and fade out
+      // Siena Parallax Scroll Animation with mobile responsiveness
+      const isMobile = window.innerWidth <= 860;
+
       sienaScrollTl
         .to(heroImgRef.current, {
-          scale: 1.2,
-          yPercent: 18,
+          scale: isMobile ? 1.12 : 1.2,
+          yPercent: isMobile ? 8 : 18,
           ease: 'none',
         }, 0)
         .to('.siena-hero-overlay', {
-          opacity: 0.9,
+          opacity: 0.95,
           ease: 'none',
         }, 0)
         .to(nameBlockRef.current, {
-          yPercent: -55,
-          xPercent: -10,
+          yPercent: isMobile ? -25 : -55,
+          xPercent: isMobile ? 0 : -10,
           opacity: 0,
           ease: 'power1.in',
         }, 0)
         .to(bottomLeftRef.current, {
-          yPercent: 45,
-          xPercent: -8,
+          yPercent: isMobile ? 20 : 45,
+          xPercent: isMobile ? 0 : -8,
           opacity: 0,
           ease: 'power1.in',
         }, 0)
         .to(bottomRightRef.current, {
-          yPercent: 45,
-          xPercent: 8,
+          yPercent: isMobile ? -15 : 45,
+          xPercent: isMobile ? 0 : 8,
           opacity: 0,
           ease: 'power1.in',
         }, 0);

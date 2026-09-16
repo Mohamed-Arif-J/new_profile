@@ -70,7 +70,7 @@ export default function Skills() {
 
           <div className="github-stats-row">
             <div>
-              <strong>5+</strong>
+              <strong>15+</strong>
               <span>Public Repos</span>
             </div>
             <div>

@@ -1,0 +1,265 @@
+{
+  "source": "https://mohamedarifj.vercel.app/",
+  "scrapedOn": "2026-08-03",
+  "metadata": {
+    "title": "Mohamed Arif J - Portfolio",
+    "description": "Building intelligent applications from backend architectures to deep learning models.",
+    "ogImage": "images/ai_image.png",
+    "googleSiteVerification": "EyKPlNe2-nnHstPN-sEyNCqD1A6zfUXYqbH65QqFRnw"
+  },
+  "identity": {
+    "name": "Mohamed Arif J",
+    "role": "Software Engineer",
+    "heroLabel": "PORTFOLIO",
+    "signature": "Mohamed Arif J",
+    "tagline": "Building intelligent applications from backend architectures to deep learning models.",
+    "profileImage": "IMG_20260519_233652.jpg.jpeg",
+    "resume": "Resume%202026.pdf"
+  },
+  "navigation": [
+    { "label": "About", "href": "#about" },
+    { "label": "Skills", "href": "#skills" },
+    { "label": "Projects", "href": "#projects" },
+    { "label": "Education", "href": "#education" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "about": {
+    "paragraphs": [
+      "I am Mohamed Arif J, a dedicated and enthusiastic B.Tech student in Computer Science and Engineering at Jawaharlal College of Engineering and Technology, driven by a passion for innovation and problem-solving in technology.",
+      "I am particularly interested in exploring the realms of AI development, neural networks, generative AI, and ethical considerations in technology. With a growth mindset, I aspire to contribute to impactful projects and gain hands-on experience in the tech industry.",
+      "My work spans building robust backend architectures, designing intuitive user interfaces, and training deep learning models that bridge the gap between complex algorithms and human-centric products. I am eager to connect with like-minded professionals, share knowledge, and collaborate on transformative ideas."
+    ],
+    "details": [
+      {
+        "label": "Education",
+        "value": "B.Tech CSE",
+        "description": "Jawaharlal College of Engineering"
+      },
+      {
+        "label": "Focus",
+        "value": "Software Engineering",
+        "description": "AI & Full-Stack Development"
+      }
+    ]
+  },
+  "education": [
+    {
+      "period": "2024 - Present",
+      "title": "B.Tech Computer Science Engineering",
+      "institution": "Jawaharlal College of Engineering and Technology",
+      "description": "Currently studying B.Tech Computer Science Engineering. Current CGPA: 9.47",
+      "scoreLabel": "Current CGPA",
+      "score": "9.47"
+    },
+    {
+      "period": "2022 - 2024",
+      "title": "Higher Secondary",
+      "institution": "Assisi English Medium Higher Secondary School Kanjikode",
+      "description": "Completed Higher Secondary education with a grade of 9.7",
+      "scoreLabel": "Grade",
+      "score": "9.7"
+    }
+  ],
+  "projects": [
+    {
+      "title": "AI Image Detector",
+      "tagline": "Deep Learning Authenticator",
+      "image": "images/ai_image.png",
+      "features": [
+        "Classifies AI-generated vs real artwork using ResNet-50.",
+        "Powered by CUDA GPU acceleration for real-time inference."
+      ],
+      "tech": ["PyTorch", "Python", "Streamlit"],
+      "links": [
+        {
+          "label": "Source",
+          "href": "https://github.com/Mohamed-Arif-J/Ai-_image_detector"
+        },
+        {
+          "label": "Live Demo",
+          "href": "https://huggingface.co/spaces/arifj/Ai-image-detctor"
+        }
+      ]
+    },
+    {
+      "title": "Fake Review Detector",
+      "tagline": "NLP Fraud Analysis",
+      "image": "images/fake_review.png",
+      "features": [
+        "Real-time Amazon/Flipkart review scraping via Selenium.",
+        "Detects fraudulent patterns with 87% accuracy using Random Forest."
+      ],
+      "tech": ["Python", "Flask", "Scikit-learn"],
+      "links": [
+        {
+          "label": "Source",
+          "href": "https://github.com/Mohamed-Arif-J/Fake-review-detector"
+        }
+      ]
+    },
+    {
+      "title": "Smart Hostel Management",
+      "tagline": "Enterprise Desktop App",
+      "image": "images/hostel.png",
+      "features": [
+        "Automates room allocation, attendance, and mess tracking.",
+        "Secure tiered access with robust MySQL JDBC integration."
+      ],
+      "tech": ["Java", "Swing", "MySQL"],
+      "links": [
+        {
+          "label": "Source",
+          "href": "https://github.com/Mohamed-Arif-J/Smart-hostel-management-sys"
+        },
+        {
+          "label": "Download",
+          "href": "https://drive.google.com/drive/folders/1QXmmbxg7LD5o4LVFVh4FGrN7AXlhxWyM"
+        }
+      ]
+    },
+    {
+      "title": "Smart Attendance",
+      "tagline": "Cross-platform Biometric System",
+      "image": "images/attendance.png",
+      "features": [
+        "Automated attendance tracking via Google ML Kit facial recognition.",
+        "Seamless cross-platform deployment on Android and Windows."
+      ],
+      "tech": ["Flutter", "Dart", "ML Kit"],
+      "links": [
+        {
+          "label": "Source",
+          "href": "https://github.com/Mohamed-Arif-J/Smart-attendence-system-"
+        }
+      ]
+    },
+    {
+      "title": "Rei - AI Assistant",
+      "tagline": "Hybrid Offline/Online LLM (WIP)",
+      "image": "images/rei.png",
+      "features": [
+        "Integrates local LLMs (Ollama, Qwen2.5) via Python and FastAPI.",
+        "Capable of system commands and browser automation."
+      ],
+      "tech": ["Python", "FastAPI", "LLMs"],
+      "links": [
+        {
+          "label": "Source",
+          "href": "#"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python",
+      "description": "ML, Data Science, Backend",
+      "iconClass": "devicon-python-plain colored"
+    },
+    {
+      "name": "Java",
+      "description": "Swing, OOP, Enterprise Apps",
+      "iconClass": "devicon-java-plain colored"
+    },
+    {
+      "name": "C / C++",
+      "description": "Algorithms, Systems",
+      "iconClass": "devicon-c-plain colored devicon-cplusplus-plain colored"
+    },
+    {
+      "name": "JavaScript",
+      "description": "DOM, Frontend Logic",
+      "iconClass": "devicon-javascript-plain colored"
+    },
+    {
+      "name": "Flutter",
+      "description": "Cross-platform Mobile",
+      "iconClass": "devicon-flutter-plain colored"
+    },
+    {
+      "name": "HTML / CSS",
+      "description": "UI / UX Design",
+      "iconClass": "devicon-html5-plain colored devicon-css3-plain colored"
+    },
+    {
+      "name": "SQL",
+      "description": "Relational Databases",
+      "iconClass": "devicon-azuresqldatabase-plain colored"
+    }
+  ],
+  "githubProfileCopy": "Active on GitHub with multiple repositories encompassing AI/ML models, desktop applications, and full-stack web solutions. Continuously building, experimenting, and pushing code.",
+  "contact": {
+    "subtitle": "Let's Connect",
+    "heading": "Contact Me",
+    "copy": "I'm always open to discussing product design work, AI integrations, or partnership opportunities.",
+    "email": "mohmedarifj@gmail.com",
+    "emailHref": "mailto:mohmedarifj@gmail.com",
+    "linkedin": "https://linkedin.com/in/mohamed-arif-j",
+    "github": "https://github.com/Mohamed-Arif-J",
+    "phone": "+91 8891130667",
+    "phoneHref": "tel:8891130667",
+    "form": {
+      "action": "https://formsubmit.co/mohmedarifj@gmail.com",
+      "method": "POST",
+      "hiddenFields": {
+        "_captcha": "false",
+        "_subject": "New Portfolio Contact Submission!"
+      },
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "label": "Name",
+          "placeholder": "John Doe",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "email",
+          "label": "Email",
+          "placeholder": "john@example.com",
+          "required": true
+        },
+        {
+          "name": "message",
+          "type": "textarea",
+          "label": "Message",
+          "placeholder": "Hello, I'd like to discuss a project...",
+          "required": true
+        }
+      ]
+    }
+  },
+  "footer": {
+    "copyright": "2026 Mohamed Arif J. All rights reserved.",
+    "note": "Designed with passion."
+  },
+  "assets": {
+    "stylesheets": [
+      "style.css?v=4",
+      "modern-theme.css",
+      "enhancements.css",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+      "https://fonts.googleapis.com/css2?family=Mr+De+Haviland&family=Inter:wght@400;500;600;900&family=Oswald:wght@500;700&display=swap"
+    ],
+    "scripts": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+      "ogl.umd.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+      "liquid-ether.js?v=3",
+      "script.js?v=3"
+    ],
+    "images": [
+      "IMG_20260519_233652.jpg.jpeg",
+      "images/ai_image.png",
+      "images/fake_review.png",
+      "images/hostel.png",
+      "images/attendance.png",
+      "images/rei.png"
+    ],
+    "documents": [
+      "Resume%202026.pdf"
+    ]
+  }
+}

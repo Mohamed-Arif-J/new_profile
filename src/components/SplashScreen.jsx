@@ -16,8 +16,8 @@ export default function SplashScreen({ done }) {
       return () => clearTimeout(exitTimer);
     }
 
-    // Step pacing totaling ~8.9s (matching 8-10 second user requirement)
-    const delays = [820, 850, 780, 920, 860, 890, 840, 950, 880, 1100];
+    // Step pacing keeps the splash visible for roughly 4 seconds total.
+    const delays = [320, 330, 310, 330, 320, 310, 330, 320, 330, 300];
     const step = Math.floor(progress / 10);
     const delay = delays[step] || 850;
 
@@ -41,7 +41,7 @@ export default function SplashScreen({ done }) {
           key="skiper15-splash"
           initial={{ y: 0 }}
           exit={{ y: '-100%' }}
-          transition={{ duration: 0.85, ease: [0.785, 0.135, 0.15, 0.86] }}
+          transition={{ duration: 0.55, ease: [0.785, 0.135, 0.15, 0.86] }}
           className="skiper15-overlay"
         >
           {/* Main Central Box Loader (Skiper15 Preloader) */}

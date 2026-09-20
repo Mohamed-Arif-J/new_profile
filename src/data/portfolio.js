@@ -11,14 +11,14 @@ export const portfolio = {
   },
   nav: [
     { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
     { label: 'Education', href: '#education' },
     { label: 'Contact', href: '#contact' },
   ],
   metrics: [
     { value: 9.47, isFloat: true, label: 'Current CGPA', suffix: '' },
-    { value: 8, isFloat: false, label: 'Selected Projects', suffix: '+' },
+    { value: 13, isFloat: false, label: 'Selected Projects', suffix: '+' },
     { value: 9.7, isFloat: true, label: 'HSC Grade', suffix: '' },
   ],
   about: {
@@ -70,6 +70,43 @@ export const portfolio = {
       ],
     },
     {
+      id: 'counselling-app',
+      title: 'Counselling App',
+      tagline: 'Psychological Support Interface',
+      image: '/assets/projects/counselling.svg',
+      accent: '#2dd4bf',
+      accentClass: 'accent-teal',
+      category: 'Psychology & Web',
+      features: [
+        'Web interface for counselling-oriented intake, guidance, and student support workflows.',
+        'Designed around calm visual hierarchy, accessible forms, and clear user paths for help-seeking.',
+        'Lightweight HTML/CSS implementation focused on fast loading and easy deployment.',
+      ],
+      tech: ['HTML', 'CSS', 'JavaScript', 'UX Design'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/counselling_app', type: 'github' },
+      ],
+    },
+    {
+      id: 'caught-in-4k',
+      title: 'Caught in 4K',
+      tagline: 'AI Moderation & Evidence Capture',
+      image: '/assets/projects/caught-4k.svg',
+      accent: '#38bdf8',
+      accentClass: 'accent-sky',
+      category: 'AI Tools & Safety',
+      features: [
+        'Python-backed project exploring detection, reporting, and client-facing moderation workflows.',
+        'Separate frontend client interface deployed on Vercel for fast review and interaction.',
+        'Built as a practical experiment in evidence capture, automation, and lightweight product UX.',
+      ],
+      tech: ['Python', 'JavaScript', 'Vercel', 'Automation'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/caught-in-4k', type: 'github' },
+        { label: 'Frontend', href: 'https://caught-in-4k-rho.vercel.app', type: 'external' },
+      ],
+    },
+    {
       id: 'rageware-os',
       title: 'RageWare OS',
       tagline: 'Retro 90s Web Operating System',
@@ -89,6 +126,43 @@ export const portfolio = {
       ],
     },
     {
+      id: 'nobrowse',
+      title: 'NOBROWSE',
+      tagline: 'Ragebait Retro Browser',
+      image: '/assets/projects/nobrowse.svg',
+      accent: '#fb7185',
+      accentClass: 'accent-rose',
+      category: 'Experimental Web',
+      features: [
+        'A playful browser parody with retro Windows 95-inspired UI and deliberately chaotic interactions.',
+        'Uses humor, interface friction, and exaggerated browser metaphors as a creative web experiment.',
+        'Deployed as a lightweight JavaScript experience on Vercel.',
+      ],
+      tech: ['JavaScript', 'HTML', 'CSS', 'Vercel'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/NOBROWSE-', type: 'github' },
+        { label: 'Live Demo', href: 'https://nobrowser.vercel.app', type: 'external' },
+      ],
+    },
+    {
+      id: 'naas',
+      title: 'NaaS - Nothing as a Service',
+      tagline: 'Satirical SaaS Product',
+      image: '/assets/projects/naas.svg',
+      accent: '#f97316',
+      accentClass: 'accent-orange',
+      category: 'Product UI Experiment',
+      features: [
+        'A satirical SaaS concept exploring landing-page storytelling, pricing patterns, and absurd product copy.',
+        'Built as a small JavaScript project to practice polished interaction and product presentation.',
+        'Focuses on memorable UX, quick scanning, and a strong visual hook.',
+      ],
+      tech: ['JavaScript', 'Product Design', 'CSS', 'Vite'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/NaaS-Nothing-as-a-Service', type: 'github' },
+      ],
+    },
+    {
       id: 'fake-review-detector',
       title: 'Fake Review Detector',
       tagline: 'NLP Fraud Analysis',
@@ -104,6 +178,24 @@ export const portfolio = {
       tech: ['Python', 'Flask', 'Scikit-learn', 'Selenium', 'Random Forest'],
       links: [
         { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/Fake-review-detector', type: 'github' },
+      ],
+    },
+    {
+      id: 'savoria',
+      title: 'Savoria',
+      tagline: 'Restaurant Web Experience',
+      image: '/assets/projects/savoria.svg',
+      accent: '#ef4444',
+      accentClass: 'accent-red',
+      category: 'Frontend & Brand UI',
+      features: [
+        'Restaurant-themed web interface with menu presentation, visual hierarchy, and conversion-focused sections.',
+        'Practices responsive layout, brand tone, and food-service landing page patterns.',
+        'Built with JavaScript as a compact frontend project.',
+      ],
+      tech: ['JavaScript', 'HTML', 'CSS', 'Responsive UI'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/savoria', type: 'github' },
       ],
     },
     {

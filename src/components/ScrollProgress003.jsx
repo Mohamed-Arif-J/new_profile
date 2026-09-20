@@ -1,12 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
-const SECTIONS = [
+const BASE_SECTIONS = [
   { id: 'home', label: 'Home', offsetPct: 0 },
   { id: 'about', label: 'About', offsetPct: 0.11 },
-  { id: 'projects', label: 'Projects', offsetPct: 0.25 },
-  { id: 'skills', label: 'Skills', offsetPct: 0.75 },
-  { id: 'education', label: 'Education', offsetPct: 0.89 },
+  { id: 'projects', label: 'Projects', offsetPct: 0.33 },
+  { id: 'skills', label: 'Skills', offsetPct: 0.6 },
+  { id: 'education', label: 'Education', offsetPct: 0.78 },
   { id: 'contact', label: 'Contact', offsetPct: 0.98 },
 ];
 
@@ -22,7 +22,44 @@ export default function ScrollProgress003({ lenis }) {
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolling, setIsScrolling] = useState(false);
   const [hoveredSection, setHoveredSection] = useState(null);
+  const [sections, setSections] = useState(BASE_SECTIONS);
   const scrollTimeout = useRef(null);
+
+  const measureSections = useCallback(() => {
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    if (maxScroll <= 0) return;
+
+    setSections(
+      BASE_SECTIONS.map((section) => {
+        const el = document.getElementById(section.id);
+        if (!el) return section;
+
+        return {
+          ...section,
+          offsetPct: Math.min(1, Math.max(0, el.offsetTop / maxScroll)),
+        };
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    measureSections();
+
+    const timers = [
+      setTimeout(measureSections, 500),
+      setTimeout(measureSections, 1500),
+      setTimeout(measureSections, 4200),
+    ];
+
+    window.addEventListener('resize', measureSections);
+
+    return () => {
+      window.removeEventListener('resize', measureSections);
+      timers.forEach(clearTimeout);
+    };
+  }, [measureSections]);
 
   // Track scroll percentage and current active section
   useEffect(() => {
@@ -32,9 +69,9 @@ export default function ScrollProgress003({ lenis }) {
       setIsScrolling(true);
 
       // Determine active section
-      for (let i = SECTIONS.length - 1; i >= 0; i--) {
-        if (latest >= SECTIONS[i].offsetPct - 0.04) {
-          setActiveSection(SECTIONS[i].id);
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (latest >= sections[i].offsetPct - 0.04) {
+          setActiveSection(sections[i].id);
           break;
         }
       }
@@ -49,7 +86,7 @@ export default function ScrollProgress003({ lenis }) {
       unsubscribe();
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     };
-  }, [scrollYProgress]);
+  }, [scrollYProgress, sections]);
 
   // Navigate to section
   const scrollToSection = (id) => {
@@ -114,7 +151,7 @@ export default function ScrollProgress003({ lenis }) {
 
           {/* Milestone Section Markers */}
           <div className="sp003-milestones">
-            {SECTIONS.map((sec) => {
+            {sections.map((sec) => {
               const isActive = activeSection === sec.id;
               return (
                 <button

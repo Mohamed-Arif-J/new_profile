@@ -177,9 +177,8 @@ body {
 }
 
 [data-theme="dark"] .scroll-stroke-path {
-  stroke: #C2F84F;
-  filter: drop-shadow(0 0 6px rgba(194, 248, 79, 0.5))
-          drop-shadow(0 0 16px rgba(194, 248, 79, 0.25));
+  stroke: rgba(56, 189, 248, 0.42);
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.18));
 }
 
 main {
@@ -684,6 +683,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(84px, 12vh, 120px) 20px 44px;
 }
 
 .lando-menu-content {
@@ -691,13 +693,14 @@ main {
   flex-direction: column;
   gap: 8px;
   width: min(600px, 90vw);
+  max-height: 100%;
 }
 
 .lando-menu-link {
   display: flex;
   align-items: baseline;
   gap: 20px;
-  padding: 18px 0;
+  padding: clamp(10px, 1.8vh, 18px) 0;
   border-bottom: 1px solid var(--line);
   text-decoration: none;
   color: var(--ink);
@@ -723,17 +726,17 @@ main {
 
 .lando-menu-label {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(1.9rem, 4.6vw, 3.6rem);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .lando-menu-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 40px;
-  padding-top: 24px;
+  margin-top: clamp(20px, 4vh, 40px);
+  padding-top: clamp(16px, 3vh, 24px);
   border-top: 1px solid var(--line);
 }
 
@@ -1857,6 +1860,210 @@ main {
 }
 
 /* ==========================================================================
+   PROJECTS GRID
+   ========================================================================== */
+.projects {
+  position: relative;
+  z-index: 10;
+}
+
+.projects-intro {
+  max-width: 860px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--line-strong);
+  background: var(--bg-card-hover);
+}
+
+.project-card-media {
+  position: relative;
+  aspect-ratio: 16 / 9.4;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.project-card-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.project-card:hover .project-card-media img {
+  transform: scale(1.035);
+}
+
+.project-card-number {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(6, 8, 12, 0.7);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+
+.project-card-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.project-card-kicker span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.project-card-kicker p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-card h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.7vw, 1.6rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.project-card-tagline {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.project-card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.48;
+}
+
+.project-card-features li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.project-card-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+.project-card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-card-tech span {
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.project-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.project-card-actions a:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+@media (max-width: 1120px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .project-card-body {
+    padding: 17px;
+  }
+}
+
+/* ==========================================================================
    SCROLL-DRIVEN STICKY PROJECT SHOWCASE
    ========================================================================== */
 .projects-scroll-section {
@@ -2301,9 +2508,13 @@ main {
   grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .github-panel {
+  min-width: 0;
+  max-width: 100%;
   padding: 32px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -2318,6 +2529,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 14px;
+  min-width: 0;
 }
 
 .github-svg {
@@ -2344,6 +2557,7 @@ main {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .github-btn {
@@ -2351,16 +2565,18 @@ main {
   align-items: center;
   gap: 8px;
   width: fit-content;
+  max-width: 100%;
   color: var(--cyan);
   font-weight: 800;
   font-size: 0.95rem;
   text-decoration: none;
   margin-top: 8px;
+  overflow-wrap: anywhere;
 }
 
 .github-stats-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   padding-top: 20px;
   border-top: 1px solid var(--line);
@@ -2371,6 +2587,7 @@ main {
   font-family: var(--font-heading);
   font-size: 1.2rem;
   color: var(--ink);
+  overflow-wrap: anywhere;
 }
 
 .github-stats-row span {
@@ -2383,6 +2600,12 @@ main {
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 24px;
+  max-width: 100%;
+}
+
+.skills-content {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .filter-tab {
@@ -2409,9 +2632,12 @@ main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .skill-card {
+  min-width: 0;
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -2432,6 +2658,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
 }
 
 .skill-icon-box i {
@@ -2443,6 +2671,8 @@ main {
   font-size: 0.7rem;
   color: var(--muted-dark);
   text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 
 .skill-card h4 {
@@ -2923,6 +3153,20 @@ main {
   }
 
   /* Skills adjustments */
+  .skills-wrap,
+  .skills-content,
+  .github-panel,
+  .skills-grid,
+  .skill-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .github-icon-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
   .category-filter-bar {
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -2953,6 +3197,7 @@ main {
   }
 
   .github-stats-row {
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -3462,4 +3707,3 @@ main {
   color: #c4f042;
   text-shadow: 0 0 14px rgba(196, 240, 66, 0.4);
 }
-

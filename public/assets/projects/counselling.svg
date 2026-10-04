@@ -1,12 +1,110 @@
-<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="720" fill="#071316"/>
-  <rect x="88" y="74" width="1024" height="572" rx="32" fill="#0f2528" stroke="#2dd4bf" stroke-opacity=".35"/>
-  <circle cx="307" cy="268" r="82" fill="#2dd4bf" fill-opacity=".18"/>
-  <circle cx="307" cy="240" r="34" fill="#ccfbf1"/>
-  <path d="M240 345c20-49 112-49 134 0" stroke="#ccfbf1" stroke-width="26" stroke-linecap="round"/>
-  <path d="M497 218h318M497 284h240M497 350h360" stroke="#99f6e4" stroke-width="30" stroke-linecap="round"/>
-  <rect x="500" y="431" width="414" height="86" rx="24" fill="#134e4a"/>
-  <path d="M542 474h250" stroke="#ccfbf1" stroke-width="18" stroke-linecap="round"/>
-  <path d="M216 548c63-30 127-30 190 0M786 548c58-30 116-30 174 0" stroke="#2dd4bf" stroke-width="14" stroke-linecap="round" opacity=".75"/>
-  <text x="92" y="676" fill="#99f6e4" font-family="Arial, sans-serif" font-size="26" font-weight="700">COUNSELLING APP</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#021614"/>
+      <stop offset="1" stop-color="#0a2f2a"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+  </defs>
+  <style>
+    .f{font-family:'Segoe UI',Helvetica,Arial,sans-serif}
+    .m{font-family:Consolas,Menlo,monospace}
+    .pop{opacity:0;animation:pop 9s ease-out infinite both}
+    @keyframes pop{0%,3%{opacity:0;transform:translateY(12px)}9%,88%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(0)}}
+    .float{animation:float 7s ease-in-out infinite alternate}
+    @keyframes float{from{transform:translate(0,0)}to{transform:translate(40px,-30px)}}
+    .breathe{transform-box:fill-box;transform-origin:center;animation:breathe 5s ease-in-out infinite}
+    @keyframes breathe{0%,100%{transform:scale(.6)}45%,55%{transform:scale(1)}}
+    .pulse{animation:pulse 1.6s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .fill{transform-box:fill-box;transform-origin:left;animation:fill 9s ease-in-out infinite}
+    @keyframes fill{0%{transform:scaleX(.05)}80%,100%{transform:scaleX(1)}}
+    .chip{animation:chip 6s ease-in-out infinite}
+    @keyframes chip{0%,40%{fill:#123a35}50%,90%{fill:#2dd4bf}100%{fill:#123a35}}
+    .draw{stroke-dasharray:200;animation:draw 6s ease-out infinite}
+    @keyframes draw{0%{stroke-dashoffset:200}60%,100%{stroke-dashoffset:0}}
+  </style>
+
+  <rect width="800" height="470" fill="url(#bg)"/>
+  <g filter="url(#blur)" opacity="0.35">
+    <circle class="float" cx="140" cy="120" r="90" fill="#2dd4bf"/>
+    <circle class="float" cx="680" cy="380" r="110" fill="#0ea5e9" style="animation-delay:-3s"/>
+  </g>
+
+  <!-- Mood card -->
+  <rect x="36" y="90" width="184" height="160" rx="18" fill="#0b2623" stroke="#2dd4bf" stroke-opacity="0.25"/>
+  <text x="54" y="116" class="m" font-size="10" fill="#5eead4" letter-spacing="1">TODAY'S MOOD</text>
+  <rect class="chip" x="54" y="130" width="60" height="26" rx="13" fill="#123a35"/>
+  <text x="84" y="147" class="f" font-size="11" fill="#e6fffa" text-anchor="middle">Calm</text>
+  <rect x="122" y="130" width="80" height="26" rx="13" fill="#123a35"/>
+  <text x="162" y="147" class="f" font-size="11" fill="#99f6e4" text-anchor="middle">Hopeful</text>
+  <rect x="54" y="164" width="80" height="26" rx="13" fill="#123a35"/>
+  <text x="94" y="181" class="f" font-size="11" fill="#99f6e4" text-anchor="middle">Anxious</text>
+  <rect class="chip" x="142" y="164" width="60" height="26" rx="13" fill="#123a35" style="animation-delay:-3s"/>
+  <text x="172" y="181" class="f" font-size="11" fill="#e6fffa" text-anchor="middle">Tired</text>
+  <path class="draw" d="M54 232 C74 210 88 226 104 214 S136 200 150 212 S186 206 202 198" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Chat panel -->
+  <rect x="250" y="24" width="300" height="422" rx="28" fill="#0b2623" stroke="#2dd4bf" stroke-opacity="0.3"/>
+  <circle cx="286" cy="62" r="17" fill="#2dd4bf"/>
+  <path d="M279 66 Q286 72 293 66" stroke="#042f2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="280" cy="58" r="2" fill="#042f2e"/>
+  <circle cx="292" cy="58" r="2" fill="#042f2e"/>
+  <text x="312" y="59" class="f" font-size="14" font-weight="700" fill="#e6fffa">Dr. Calm</text>
+  <circle class="pulse" cx="317" cy="74" r="4" fill="#22c55e"/>
+  <text x="327" y="78" class="f" font-size="11" fill="#5eead4">online · listening</text>
+  <line x1="268" y1="96" x2="532" y2="96" stroke="#2dd4bf" stroke-opacity="0.15"/>
+
+  <g class="pop">
+    <rect x="270" y="110" width="206" height="36" rx="14" fill="#123a35"/>
+    <text x="284" y="133" class="f" font-size="12" fill="#ccfbf1">Hi! How are you feeling today?</text>
+  </g>
+  <g class="pop" style="animation-delay:1s">
+    <rect x="352" y="156" width="178" height="36" rx="14" fill="#2dd4bf"/>
+    <text x="366" y="179" class="f" font-size="12" fill="#042f2e">A bit stressed about exams.</text>
+  </g>
+  <g class="pop" style="animation-delay:2s">
+    <rect x="270" y="202" width="232" height="36" rx="14" fill="#123a35"/>
+    <text x="284" y="225" class="f" font-size="12" fill="#ccfbf1">That's okay. Let's breathe together.</text>
+  </g>
+  <g class="pop" style="animation-delay:3s">
+    <rect x="270" y="248" width="190" height="96" rx="16" fill="#123a35"/>
+    <circle class="breathe" cx="318" cy="296" r="30" fill="#2dd4bf" opacity="0.25"/>
+    <circle class="breathe" cx="318" cy="296" r="18" fill="#2dd4bf"/>
+    <text x="360" y="292" class="f" font-size="12" font-weight="600" fill="#ccfbf1">Breathe in...</text>
+    <text x="360" y="310" class="m" font-size="11" fill="#5eead4">4 · 7 · 8</text>
+  </g>
+  <g class="pop" style="animation-delay:4.2s">
+    <rect x="384" y="354" width="146" height="34" rx="14" fill="#2dd4bf"/>
+    <text x="398" y="376" class="f" font-size="12" fill="#042f2e">Thanks, that helps!</text>
+  </g>
+
+  <rect x="266" y="400" width="268" height="32" rx="16" fill="#0f302c"/>
+  <text x="284" y="420" class="f" font-size="11" fill="#5f8f88">Type a message...</text>
+  <circle cx="516" cy="416" r="12" fill="#2dd4bf"/>
+  <path d="M511 416 H520 M516 411 L521 416 L516 421" stroke="#042f2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Session card -->
+  <rect x="580" y="90" width="184" height="120" rx="18" fill="#0b2623" stroke="#2dd4bf" stroke-opacity="0.25"/>
+  <text x="598" y="116" class="m" font-size="10" fill="#5eead4" letter-spacing="1">SESSION 03</text>
+  <text x="598" y="152" class="f" font-size="28" font-weight="800" fill="#e6fffa">25 min</text>
+  <rect x="598" y="174" width="148" height="8" rx="4" fill="#123a35"/>
+  <rect class="fill" x="598" y="174" width="148" height="8" rx="4" fill="#2dd4bf"/>
+
+  <!-- Check-in card -->
+  <rect x="580" y="228" width="184" height="150" rx="18" fill="#0b2623" stroke="#2dd4bf" stroke-opacity="0.25"/>
+  <text x="598" y="254" class="m" font-size="10" fill="#5eead4" letter-spacing="1">DAILY CHECK-IN</text>
+  <g>
+    <circle cx="608" cy="280" r="9" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+    <g class="pop" style="animation-delay:1.5s"><circle cx="608" cy="280" r="9" fill="#2dd4bf"/><path d="M604 280 L607 283 L612 277" stroke="#042f2e" stroke-width="2" fill="none"/></g>
+    <rect x="626" y="276" width="110" height="8" rx="4" fill="#1f4a44"/>
+    <circle cx="608" cy="314" r="9" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+    <g class="pop" style="animation-delay:2.7s"><circle cx="608" cy="314" r="9" fill="#2dd4bf"/><path d="M604 314 L607 317 L612 311" stroke="#042f2e" stroke-width="2" fill="none"/></g>
+    <rect x="626" y="310" width="90" height="8" rx="4" fill="#1f4a44"/>
+    <circle cx="608" cy="348" r="9" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+    <g class="pop" style="animation-delay:3.9s"><circle cx="608" cy="348" r="9" fill="#2dd4bf"/><path d="M604 348 L607 351 L612 345" stroke="#042f2e" stroke-width="2" fill="none"/></g>
+    <rect x="626" y="344" width="120" height="8" rx="4" fill="#1f4a44"/>
+  </g>
 </svg>

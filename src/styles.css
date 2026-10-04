@@ -780,9 +780,9 @@ main {
 
 /* Sections General */
 .section {
-  width: min(var(--max), calc(100% - 32px));
+  width: 100%;
   margin: 0 auto;
-  padding: clamp(6rem, 10vw, 9rem) 0;
+  padding: clamp(6rem, 10vw, 9rem) clamp(20px, 3.4vw, 56px);
 }
 
 .section.contact {
@@ -2595,6 +2595,301 @@ main {
   color: var(--muted);
 }
 
+.skills-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* GitHub Contribution Heatmap Chart */
+.gh-chart-container {
+  min-width: 0;
+  max-width: 100%;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.gh-chart-container:hover {
+  border-color: var(--line-strong);
+}
+
+.gh-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gh-chart-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gh-chart-icon {
+  color: var(--cyan);
+}
+
+.gh-chart-title-wrap h4 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.gh-chart-total-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+}
+
+.gh-chart-total-pill strong {
+  color: var(--ink);
+}
+
+.gh-chart-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.gh-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gh-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gh-metric-value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.streak-flame {
+  color: #f97316;
+}
+
+.gh-heatmap-scroll {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-bottom: 6px;
+}
+
+.gh-heatmap-scroll::-webkit-scrollbar {
+  height: 4px !important;
+  display: block !important;
+}
+
+.gh-heatmap-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 4px;
+}
+
+.gh-heatmap-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 520px;
+}
+
+.gh-months-row {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 28px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.gh-grid-body {
+  display: flex;
+  gap: 6px;
+}
+
+.gh-days-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 94px;
+  padding-top: 2px;
+}
+
+.gh-day-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.gh-matrix {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+}
+
+.gh-matrix-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gh-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.12s ease, outline 0.12s ease;
+}
+
+.gh-cell:hover {
+  transform: scale(1.35);
+  outline: 1.5px solid var(--cyan);
+  z-index: 5;
+}
+
+/* Light Theme Commit Levels */
+[data-theme="light"] .gh-level-0 { background: rgba(15, 23, 42, 0.08); }
+[data-theme="light"] .gh-level-1 { background: #9be9a8; }
+[data-theme="light"] .gh-level-2 { background: #40c463; }
+[data-theme="light"] .gh-level-3 { background: #30a14e; }
+[data-theme="light"] .gh-level-4 { background: #216e39; }
+
+/* Dark Theme Commit Levels */
+[data-theme="dark"] .gh-level-0 { background: rgba(255, 255, 255, 0.08); }
+[data-theme="dark"] .gh-level-1 { background: #0e4429; }
+[data-theme="dark"] .gh-level-2 { background: #006d32; }
+[data-theme="dark"] .gh-level-3 { background: #26a641; }
+[data-theme="dark"] .gh-level-4 { background: #39d353; }
+
+.gh-cell-tooltip {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #090d16;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.gh-cell-tooltip strong {
+  color: #39d353;
+}
+
+.gh-legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.gh-legend-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin: 0 4px;
+}
+
+.gh-year-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.gh-year-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.gh-year-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.gh-year-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gh-year-btn:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.gh-year-btn.is-active {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.35);
+}
+
+/* Skipper Staircase Theme Transition Overlay */
+.skipper-staircase-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+
 .category-filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -2715,8 +3010,9 @@ main {
   color: var(--muted);
 }
 
-/* Education Section & Retro Sticker Cursor Trail */
-.education {
+/* Retro Sticker Cursor Trail Sections */
+.education,
+.contact {
   position: relative;
   overflow: hidden;
 }
@@ -3046,9 +3342,9 @@ main {
 
 /* Footer */
 .footer {
-  width: min(var(--max), calc(100% - 32px));
+  width: 100%;
   margin: 0 auto;
-  padding: 40px 0 60px;
+  padding: 40px clamp(20px, 3.4vw, 56px) 60px;
   border-top: 1px solid var(--line);
 }
 
@@ -3073,8 +3369,8 @@ main {
 }
 
 [data-theme="dark"] .crowd-canvas {
-  filter: invert(0.55) brightness(0.85) contrast(1.1);
-  opacity: 0.72;
+  filter: saturate(1.05) brightness(0.95); /* colors are baked into the sprite in CrowdCanvas.jsx */
+  opacity: 0.92;
 }
 
 [data-theme="light"] .crowd-canvas {
@@ -3122,8 +3418,8 @@ main {
 
 @media (max-width: 768px) {
   .section {
-    width: calc(100% - 32px);
-    padding: clamp(4rem, 8vw, 6rem) 0;
+    width: 100%;
+    padding: clamp(4rem, 8vw, 6rem) 16px;
   }
 
   .section.contact {
@@ -3328,7 +3624,7 @@ main {
 
   /* Footer on mobile */
   .footer {
-    padding: 30px 0 50px;
+    padding: 30px 16px 50px;
   }
 
   .footer-crowd-stage {

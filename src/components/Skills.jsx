@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowUpRight, Code2, Github } from 'lucide-react';
 import gsap from 'gsap';
 import { portfolio } from '../data/portfolio.js';
+import GitHubContributionChart from './GitHubContributionChart.jsx';
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -47,37 +48,41 @@ export default function Skills() {
       </div>
 
       <div className="skills-wrap">
-        <div className="github-panel reveal-fade" data-magnetic>
-          <div className="github-icon-row">
-            <Github size={40} className="github-svg" />
-            <span className="live-status-pill">Active Developer</span>
+        <div className="skills-left-col">
+          <div className="github-panel reveal-fade" data-magnetic>
+            <div className="github-icon-row">
+              <Github size={40} className="github-svg" />
+              <span className="live-status-pill">Active Developer</span>
+            </div>
+
+            <h3>GitHub Engineering Profile</h3>
+            <p>{portfolio.githubProfileCopy}</p>
+
+            <a
+              href={portfolio.contact.github}
+              target="_blank"
+              rel="noreferrer"
+              className="github-btn"
+              data-magnetic
+              data-cursor="GIT"
+            >
+              <span>Visit @Mohamed-Arif-J</span>
+              <ArrowUpRight size={16} />
+            </a>
+
+            <div className="github-stats-row">
+              <div>
+                <strong>15+</strong>
+                <span>Public Repos</span>
+              </div>
+              <div>
+                <strong>ResNet / NLP / ML</strong>
+                <span>Core Architectures</span>
+              </div>
+            </div>
           </div>
 
-          <h3>GitHub Engineering Profile</h3>
-          <p>{portfolio.githubProfileCopy}</p>
-
-          <a
-            href={portfolio.contact.github}
-            target="_blank"
-            rel="noreferrer"
-            className="github-btn"
-            data-magnetic
-            data-cursor="GIT"
-          >
-            <span>Visit @Mohamed-Arif-J</span>
-            <ArrowUpRight size={16} />
-          </a>
-
-          <div className="github-stats-row">
-            <div>
-              <strong>15+</strong>
-              <span>Public Repos</span>
-            </div>
-            <div>
-              <strong>ResNet / NLP / ML</strong>
-              <span>Core Architectures</span>
-            </div>
-          </div>
+          <GitHubContributionChart />
         </div>
 
         <div className="skills-content">
@@ -123,4 +128,3 @@ export default function Skills() {
     </section>
   );
 }
-

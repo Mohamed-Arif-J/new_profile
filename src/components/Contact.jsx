@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowRight, Check, Copy, Github, Linkedin, Mail, Phone, Send } from 'lucide-react';
 import { portfolio } from '../data/portfolio.js';
+import StickerCursorTrail from './StickerCursorTrail.jsx';
 
 export default function Contact() {
+  const containerRef = useRef(null);
   const [copiedField, setCopiedField] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -17,7 +19,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="section contact" id="contact">
+    <section className="section contact" id="contact" ref={containerRef}>
       <div className="contact-info">
         <div className="section-intro">
           <p className="eyebrow reveal-line">{portfolio.contact.subtitle}</p>
@@ -141,6 +143,8 @@ export default function Contact() {
           <span>Copied {copiedField === 'email' ? 'Email' : 'Phone'} to clipboard!</span>
         </div>
       )}
+
+      <StickerCursorTrail containerRef={containerRef} />
     </section>
   );
 }

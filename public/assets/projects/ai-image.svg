@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#030f15"/>
+      <stop offset="1" stop-color="#0a2431"/>
+    </linearGradient>
+    <linearGradient id="portraitBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b1d5a"/>
+      <stop offset="1" stop-color="#0e4a5a"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#54e0d6" stop-opacity="0"/>
+      <stop offset="1" stop-color="#54e0d6" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cf5ec"/>
+      <stop offset="1" stop-color="#16707a"/>
+    </linearGradient>
+    <radialGradient id="heat">
+      <stop offset="0" stop-color="#fde047"/>
+      <stop offset="0.45" stop-color="#f97316" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#dc2626" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect x="64" y="92" width="290" height="318" rx="10"/></clipPath>
+    <clipPath id="heatClip"><rect x="586" y="122" width="138" height="124" rx="8"/></clipPath>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#54e0d6" stroke-opacity="0.06"/>
+    </pattern>
+  </defs>
+  <style>
+    .m{font-family:Consolas,Menlo,monospace}
+    .f{font-family:'Segoe UI',Helvetica,Arial,sans-serif}
+    .scan{animation:scan 3.2s ease-in-out infinite alternate}
+    @keyframes scan{from{transform:translateY(0)}to{transform:translateY(316px)}}
+    .ring{stroke-dasharray:289;animation:ring 6s ease-out infinite}
+    @keyframes ring{0%{stroke-dashoffset:289}45%,85%{stroke-dashoffset:17}100%{stroke-dashoffset:289}}
+    .blob{transform-box:fill-box;transform-origin:center;animation:blob 2.4s ease-in-out infinite alternate}
+    @keyframes blob{from{transform:scale(.7);opacity:.55}to{transform:scale(1.15);opacity:1}}
+    .bar{transform-box:fill-box;transform-origin:bottom;animation:bar 1.6s ease-in-out infinite alternate}
+    @keyframes bar{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
+    .lm{animation:lm 1.8s ease-in-out infinite}
+    @keyframes lm{0%,100%{opacity:.25}50%{opacity:1}}
+    .cur{animation:cur 1s steps(1) infinite}
+    @keyframes cur{50%{opacity:0}}
+    .tag{animation:tag 6s ease-out infinite}
+    @keyframes tag{0%,40%{opacity:0}48%,85%{opacity:1}100%{opacity:0}}
+  </style>
+
+  <rect width="800" height="470" fill="url(#bg)"/>
+  <rect width="800" height="470" fill="url(#grid)"/>
+
+  <!-- App window -->
+  <rect x="36" y="28" width="728" height="414" rx="18" fill="#061620" stroke="#54e0d6" stroke-opacity="0.25"/>
+  <circle cx="60" cy="50" r="5" fill="#ff5f57"/>
+  <circle cx="76" cy="50" r="5" fill="#febc2e"/>
+  <circle cx="92" cy="50" r="5" fill="#28c840"/>
+  <text x="112" y="54" class="m" font-size="12" fill="#54e0d6" letter-spacing="2">AURALENS | AI IMAGE DETECTOR</text>
+  <text x="548" y="54" class="f" font-size="11" fill="#6b8a99">Dashboard    Analyze    History</text>
+  <line x1="36" y1="72" x2="764" y2="72" stroke="#54e0d6" stroke-opacity="0.15"/>
+
+  <!-- Portrait being analysed -->
+  <g clip-path="url(#frame)">
+    <rect x="64" y="92" width="290" height="318" fill="url(#portraitBg)"/>
+    <circle cx="310" cy="130" r="70" fill="#54e0d6" opacity="0.12"/>
+    <path d="M146 222 C140 150 180 128 209 128 C246 128 280 152 272 226 C268 262 262 300 272 336 L232 304 L186 304 L148 336 C156 300 150 262 146 222 Z" fill="#2b1b3d"/>
+    <path d="M110 410 C116 342 158 318 209 318 C260 318 302 342 308 410 Z" fill="#1d3557"/>
+    <rect x="194" y="276" width="30" height="48" rx="12" fill="#e2ab93"/>
+    <ellipse cx="209" cy="222" rx="50" ry="62" fill="#f1c5ae"/>
+    <path d="M158 212 C160 160 190 146 212 146 C240 146 262 166 262 206 C240 192 214 180 192 168 C184 188 172 202 158 212 Z" fill="#3a2550"/>
+    <ellipse cx="190" cy="230" rx="6" ry="4" fill="#1f2937"/>
+    <ellipse cx="228" cy="230" rx="6" ry="4" fill="#1f2937"/>
+    <path d="M200 264 Q209 271 218 264" stroke="#b45362" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- face mesh -->
+    <g stroke="#54e0d6" stroke-opacity="0.45" stroke-width="1" fill="none">
+      <path d="M170 200 L190 230 L209 248 L228 230 L248 200 M190 230 L228 230 M209 248 L200 264 M209 248 L218 264 M170 200 L209 176 L248 200"/>
+    </g>
+    <g fill="#7cf5ec">
+      <circle class="lm" cx="170" cy="200" r="3"/>
+      <circle class="lm" cx="248" cy="200" r="3" style="animation-delay:.3s"/>
+      <circle class="lm" cx="209" cy="176" r="3" style="animation-delay:.6s"/>
+      <circle class="lm" cx="190" cy="230" r="3" style="animation-delay:.9s"/>
+      <circle class="lm" cx="228" cy="230" r="3" style="animation-delay:1.2s"/>
+      <circle class="lm" cx="209" cy="248" r="3" style="animation-delay:.45s"/>
+      <circle class="lm" cx="200" cy="264" r="3" style="animation-delay:.75s"/>
+      <circle class="lm" cx="218" cy="264" r="3" style="animation-delay:1.05s"/>
+    </g>
+  </g>
+  <g clip-path="url(#frame)">
+    <g class="scan">
+      <rect x="64" y="62" width="290" height="30" fill="url(#trail)"/>
+      <rect x="64" y="91" width="290" height="2" fill="#7cf5ec"/>
+    </g>
+  </g>
+  <g stroke="#54e0d6" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M64 112 V92 H84"/>
+    <path d="M334 92 H354 V112"/>
+    <path d="M64 390 V410 H84"/>
+    <path d="M334 410 H354 V390"/>
+  </g>
+  <g class="tag">
+    <rect x="76" y="104" width="118" height="22" rx="11" fill="#54e0d6"/>
+    <text x="135" y="119" class="m" font-size="10" font-weight="700" fill="#03222a" text-anchor="middle">AI-GENERATED</text>
+  </g>
+
+  <!-- Confidence ring -->
+  <rect x="378" y="92" width="176" height="170" rx="12" fill="#0b2230"/>
+  <text x="394" y="112" class="m" font-size="10" fill="#6b8a99" letter-spacing="1">CONFIDENCE</text>
+  <circle cx="466" cy="172" r="46" fill="none" stroke="#163343" stroke-width="10"/>
+  <circle class="ring" cx="466" cy="172" r="46" fill="none" stroke="#54e0d6" stroke-width="10" stroke-linecap="round" transform="rotate(-90 466 172)"/>
+  <text x="466" y="180" class="f" font-size="24" font-weight="800" fill="#e6fffb" text-anchor="middle">94%</text>
+  <text x="466" y="244" class="m" font-size="9" fill="#54e0d6" text-anchor="middle" letter-spacing="1">SYNTHETIC LIKELIHOOD</text>
+
+  <!-- Grad-CAM heatmap -->
+  <rect x="570" y="92" width="170" height="170" rx="12" fill="#0b2230"/>
+  <text x="586" y="112" class="m" font-size="10" fill="#6b8a99" letter-spacing="1">GRAD-CAM</text>
+  <rect x="586" y="122" width="138" height="124" rx="8" fill="#101e29"/>
+  <g clip-path="url(#heatClip)">
+    <circle class="blob" cx="632" cy="170" r="38" fill="url(#heat)"/>
+    <circle class="blob" cx="690" cy="206" r="28" fill="url(#heat)" style="animation-delay:.8s"/>
+    <circle class="blob" cx="616" cy="226" r="22" fill="url(#heat)" style="animation-delay:1.4s"/>
+  </g>
+
+  <!-- Layer activations -->
+  <rect x="378" y="278" width="362" height="132" rx="12" fill="#0b2230"/>
+  <text x="394" y="298" class="m" font-size="10" fill="#6b8a99" letter-spacing="1">LAYER ACTIVATIONS · RESNET-50</text>
+  <g fill="url(#barGrad)">
+    <rect class="bar" x="396" y="316" width="14" height="80" rx="3"/>
+    <rect class="bar" x="420" y="316" width="14" height="80" rx="3" style="animation-delay:-.3s"/>
+    <rect class="bar" x="444" y="316" width="14" height="80" rx="3" style="animation-delay:-.9s"/>
+    <rect class="bar" x="468" y="316" width="14" height="80" rx="3" style="animation-delay:-.5s"/>
+    <rect class="bar" x="492" y="316" width="14" height="80" rx="3" style="animation-delay:-1.3s"/>
+    <rect class="bar" x="516" y="316" width="14" height="80" rx="3" style="animation-delay:-.2s"/>
+    <rect class="bar" x="540" y="316" width="14" height="80" rx="3" style="animation-delay:-1.1s"/>
+    <rect class="bar" x="564" y="316" width="14" height="80" rx="3" style="animation-delay:-.7s"/>
+    <rect class="bar" x="588" y="316" width="14" height="80" rx="3" style="animation-delay:-1.5s"/>
+    <rect class="bar" x="612" y="316" width="14" height="80" rx="3" style="animation-delay:-.4s"/>
+    <rect class="bar" x="636" y="316" width="14" height="80" rx="3" style="animation-delay:-1s"/>
+    <rect class="bar" x="660" y="316" width="14" height="80" rx="3" style="animation-delay:-.6s"/>
+    <rect class="bar" x="684" y="316" width="14" height="80" rx="3" style="animation-delay:-1.2s"/>
+    <rect class="bar" x="708" y="316" width="14" height="80" rx="3" style="animation-delay:-.1s"/>
+  </g>
+
+  <text x="64" y="431" class="m" font-size="11" fill="#7dd3c8">&gt; resnet50.forward(batch=32) · cuda:0 · 12ms</text>
+  <rect class="cur" x="388" y="421" width="7" height="13" fill="#7cf5ec"/>
+</svg>

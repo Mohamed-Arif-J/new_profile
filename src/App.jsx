@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,6 +16,7 @@ import Skills from './components/Skills.jsx';
 import Education from './components/Education.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
+import StaircaseThemeTransition from './components/StaircaseThemeTransition.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,9 +24,20 @@ export default function App() {
   const [lenisInstance, setLenisInstance] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [theme, setTheme] = useState('light');
+  const transitionRef = useRef(null);
+
+  const handleThemeSwitch = (nextTheme) => {
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+  };
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    if (transitionRef.current) {
+      transitionRef.current.startTransition(theme, nextTheme);
+    } else {
+      handleThemeSwitch(nextTheme);
+    }
   };
 
   useEffect(() => {
@@ -184,6 +196,7 @@ export default function App() {
         />
       )}
       <GradientMeshBg />
+      <StaircaseThemeTransition ref={transitionRef} onThemeSwitch={handleThemeSwitch} />
       <ScrollProgress003 lenis={lenisInstance} />
       <ScrollControls lenis={lenisInstance} />
 

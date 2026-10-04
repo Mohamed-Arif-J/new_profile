@@ -1,118 +1,99 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
   <defs>
-    <linearGradient id="mlBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b0e14"/>
-      <stop offset="50%" stop-color="#121824"/>
-      <stop offset="100%" stop-color="#0a0d14"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0418"/>
+      <stop offset="1" stop-color="#190930"/>
     </linearGradient>
-    <linearGradient id="purpleGlow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#c084fc"/>
-    </linearGradient>
-    <linearGradient id="cyanGlow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="100%" stop-color="#3b82f6"/>
+    <linearGradient id="curve" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#ec4899"/>
     </linearGradient>
   </defs>
 
-  <!-- Background -->
-  <rect width="800" height="480" fill="url(#mlBg)"/>
-  
-  <!-- Subtle Grid Pattern -->
-  <g opacity="0.12" stroke="#8b5cf6" stroke-width="1">
-    <line x1="0" y1="80" x2="800" y2="80"/>
-    <line x1="0" y1="160" x2="800" y2="160"/>
-    <line x1="0" y1="240" x2="800" y2="240"/>
-    <line x1="0" y1="320" x2="800" y2="320"/>
-    <line x1="0" y1="400" x2="800" y2="400"/>
-    <line x1="160" y1="0" x2="160" y2="480"/>
-    <line x1="320" y1="0" x2="320" y2="480"/>
-    <line x1="480" y1="0" x2="480" y2="480"/>
-    <line x1="640" y1="0" x2="640" y2="480"/>
-  </g>
+  <style>
+    .mono{font-family:Consolas,monospace,sans-serif}
+    .ui{font-family:'Segoe UI',Tahoma,sans-serif}
+    .curve-draw{stroke-dasharray:600;animation:drawCurve 4s ease-in-out infinite alternate}
+    @keyframes drawCurve{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+    .dot-pop{animation:popScatter 2s ease-in-out infinite alternate}
+    @keyframes popScatter{from{r:3}to{r:6}}
+  </style>
 
-  <!-- Header / Navigation Bar -->
-  <rect x="30" y="25" width="740" height="50" rx="12" fill="#151b28" stroke="rgba(139,92,246,0.3)" stroke-width="1"/>
-  <circle cx="58" cy="50" r="10" fill="#8b5cf6"/>
-  <text x="80" y="55" font-family="'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#f8fafc">Screen Addiction GBDT Pipeline</text>
-  <rect x="620" y="38" width="130" height="24" rx="12" fill="rgba(139,92,246,0.2)" stroke="#8b5cf6" stroke-width="1"/>
-  <text x="685" y="54" font-family="monospace" font-size="11" font-weight="bold" fill="#c084fc" text-anchor="middle">AUC: 0.942 [LightGBM]</text>
+  <rect width="800" height="480" fill="url(#bg)"/>
 
-  <!-- Left Card: Feature Importance Breakdown -->
-  <g transform="translate(30, 95)">
-    <rect width="350" height="355" rx="16" fill="#131824" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <text x="24" y="36" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">Feature Importance (Gain)</text>
-    
-    <!-- Bar 1 -->
-    <text x="24" y="75" font-family="monospace" font-size="11" fill="#94a3b8">Screen_Time_Daily_Hours</text>
-    <rect x="24" y="85" width="300" height="12" rx="6" fill="#1e293b"/>
-    <rect x="24" y="85" width="270" height="12" rx="6" fill="url(#purpleGlow)"/>
-    <text x="298" y="75" font-family="monospace" font-size="11" fill="#c084fc">92%</text>
+  <!-- Analytics Shell -->
+  <g transform="translate(30, 25)">
+    <rect width="740" height="430" rx="14" fill="#150726" stroke="#a855f7" stroke-opacity="0.35" stroke-width="2"/>
 
-    <!-- Bar 2 -->
-    <text x="24" y="130" font-family="monospace" font-size="11" fill="#94a3b8">Social_App_Pickup_Frequency</text>
-    <rect x="24" y="140" width="300" height="12" rx="6" fill="#1e293b"/>
-    <rect x="24" y="140" width="225" height="12" rx="6" fill="url(#purpleGlow)"/>
-    <text x="298" y="130" font-family="monospace" font-size="11" fill="#c084fc">78%</text>
+    <!-- Header -->
+    <rect width="740" height="46" rx="14" fill="#240c42"/>
+    <circle cx="28" cy="23" r="6" fill="#ef4444"/>
+    <circle cx="46" cy="23" r="6" fill="#facc15"/>
+    <circle cx="64" cy="23" r="6" fill="#22c55e"/>
+    <text x="88" y="28" class="mono" font-size="13" font-weight="bold" fill="#c084fc">
+      SCREEN ADDICTION GBDT PIPELINE // LIGHTGBM BEHAVIORAL ANALYTICS [91.8% PRECISION]
+    </text>
 
-    <!-- Bar 3 -->
-    <text x="24" y="185" font-family="monospace" font-size="11" fill="#94a3b8">Sleep_Latency_Degradation</text>
-    <rect x="24" y="195" width="300" height="12" rx="6" fill="#1e293b"/>
-    <rect x="24" y="195" width="180" height="12" rx="6" fill="url(#cyanGlow)"/>
-    <text x="298" y="185" font-family="monospace" font-size="11" fill="#38bdf8">61%</text>
+    <!-- Left Chart: ROC-AUC Predictive Curve -->
+    <g transform="translate(24, 66)">
+      <rect width="400" height="240" rx="8" fill="#0d031c" stroke="#3b1668" stroke-width="2"/>
+      <text x="16" y="24" class="mono" font-size="11" font-weight="bold" fill="#c084fc">
+        [ROC-AUC CLASSIFICATION CURVE // AUC = 0.942]
+      </text>
 
-    <!-- Bar 4 -->
-    <text x="24" y="240" font-family="monospace" font-size="11" fill="#94a3b8">Late_Night_Notification_Ratio</text>
-    <rect x="24" y="250" width="300" height="12" rx="6" fill="#1e293b"/>
-    <rect x="24" y="250" width="145" height="12" rx="6" fill="url(#cyanGlow)"/>
-    <text x="298" y="240" font-family="monospace" font-size="11" fill="#38bdf8">49%</text>
+      <!-- Axes -->
+      <g stroke="#4c1d85" stroke-width="2">
+        <line x1="45" y1="45" x2="45" y2="200"/>
+        <line x1="45" y1="200" x2="360" y2="200"/>
+      </g>
+      <!-- Reference diagonal -->
+      <line x1="45" y1="200" x2="360" y2="45" stroke="#371761" stroke-width="1.5" stroke-dasharray="6 6"/>
 
-    <!-- Bar 5 -->
-    <text x="24" y="295" font-family="monospace" font-size="11" fill="#94a3b8">Attention_Span_Decay_Rate</text>
-    <rect x="24" y="305" width="300" height="12" rx="6" fill="#1e293b"/>
-    <rect x="24" y="305" width="110" height="12" rx="6" fill="#10b981"/>
-    <text x="298" y="295" font-family="monospace" font-size="11" fill="#34d399">37%</text>
-  </g>
+      <!-- Animated ROC Curve -->
+      <path class="curve-draw" d="M45 200 C55 90 90 55 200 48 S320 46 360 45" fill="none" stroke="url(#curve)" stroke-width="4"/>
 
-  <!-- Right Card: ROC Curve & Decision Trees Analytics -->
-  <g transform="translate(410, 95)">
-    <rect width="360" height="355" rx="16" fill="#131824" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <text x="24" y="36" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">ROC-AUC Performance &amp; Convergence</text>
-
-    <!-- ROC Curve Graph Area -->
-    <rect x="24" y="60" width="312" height="180" rx="10" fill="#090d14" stroke="rgba(139,92,246,0.2)" stroke-width="1"/>
-    
-    <!-- Grid inside graph -->
-    <line x1="24" y1="120" x2="336" y2="120" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
-    <line x1="24" y1="180" x2="336" y2="180" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
-    <line x1="102" y1="60" x2="102" y2="240" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
-    <line x1="180" y1="60" x2="180" y2="240" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
-    <line x1="258" y1="60" x2="258" y2="240" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
-
-    <!-- Diagonal baseline -->
-    <line x1="24" y1="240" x2="336" y2="60" stroke="#475569" stroke-width="1.5" stroke-dasharray="3"/>
-
-    <!-- Gradient Boosted ROC Curve (Curving sharply into top-left) -->
-    <path d="M 24 240 C 40 100, 90 75, 336 65" fill="none" stroke="#a855f7" stroke-width="3.5"/>
-
-    <!-- Validation Loss Curve -->
-    <path d="M 24 240 C 55 140, 120 110, 336 85" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4"/>
-
-    <!-- Metric Tags -->
-    <g transform="translate(24, 260)">
-      <rect width="96" height="60" rx="8" fill="#1a202c" stroke="rgba(255,255,255,0.06)"/>
-      <text x="48" y="24" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">PRECISION</text>
-      <text x="48" y="48" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#a855f7" text-anchor="middle">91.8%</text>
+      <!-- Labels -->
+      <text x="18" y="125" class="mono" font-size="9" fill="#94a3b8" transform="rotate(-90 18 125)">True Positive Rate</text>
+      <text x="180" y="222" class="mono" font-size="9" fill="#94a3b8">False Positive Rate</text>
     </g>
-    <g transform="translate(132, 260)">
-      <rect width="96" height="60" rx="8" fill="#1a202c" stroke="rgba(255,255,255,0.06)"/>
-      <text x="48" y="24" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">RECALL</text>
-      <text x="48" y="48" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">89.4%</text>
+
+    <!-- Right Side: Feature Importance Matrix -->
+    <g transform="translate(445, 66)">
+      <rect width="270" height="240" rx="8" fill="#0d031c" stroke="#3b1668" stroke-width="2"/>
+      <text x="16" y="24" class="mono" font-size="11" font-weight="bold" fill="#c084fc">
+        [LIGHTGBM FEATURE IMPORTANCE]
+      </text>
+
+      <!-- Feature Bars -->
+      <g transform="translate(16, 46)">
+        <text x="0" y="14" class="mono" font-size="10" fill="#e2e8f0">Nightly Screen Pickups</text>
+        <rect x="0" y="20" width="220" height="12" rx="3" fill="#a855f7"/>
+
+        <text x="0" y="52" class="mono" font-size="10" fill="#e2e8f0">Dopamine App Switch Freq</text>
+        <rect x="0" y="58" width="180" height="12" rx="3" fill="#ec4899"/>
+
+        <text x="0" y="90" class="mono" font-size="10" fill="#e2e8f0">Continuous Session Duration</text>
+        <rect x="0" y="96" width="145" height="12" rx="3" fill="#8b5cf6"/>
+
+        <text x="0" y="128" class="mono" font-size="10" fill="#e2e8f0">First Pickup Latency Post-Wake</text>
+        <rect x="0" y="134" width="115" height="12" rx="3" fill="#6366f1"/>
+
+        <text x="0" y="166" class="mono" font-size="10" fill="#4ade80">Overall Model Precision: 91.8%</text>
+      </g>
     </g>
-    <g transform="translate(240, 260)">
-      <rect width="96" height="60" rx="8" fill="#1a202c" stroke="rgba(255,255,255,0.06)"/>
-      <text x="48" y="24" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">F1-SCORE</text>
-      <text x="48" y="48" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#34d399" text-anchor="middle">0.906</text>
+
+    <!-- Bottom Specs -->
+    <g transform="translate(24, 324)">
+      <rect width="692" height="80" rx="8" fill="#0d031c" stroke="#3b1668" stroke-width="2"/>
+      <text x="16" y="24" class="mono" font-size="11" fill="#c084fc">
+        ML Architecture: LightGBM Gradient Boosted Decision Trees • Scikit-learn • Pandas Data Pipeline
+      </text>
+      <text x="16" y="46" class="mono" font-size="11" fill="#f8fafc">
+        Evaluation Metrics: Comprehensive K-Fold Cross Validation • Automated Behavioral Habit PDF Reports
+      </text>
+      <text x="16" y="68" class="mono" font-size="11" fill="#4ade80">
+        ✔ Precision-Optimized Multi-Platform Behavioral Analytics Pipeline
+      </text>
     </g>
   </g>
 </svg>

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { ArrowRight, Check, Copy, Github, Linkedin, Mail, Phone, Send } from 'lucide-react';
 import { portfolio } from '../data/portfolio.js';
-import StickerCursorTrail from './StickerCursorTrail.jsx';
+import CursorTrail from './CursorTrail.jsx';
 
 export default function Contact() {
   const containerRef = useRef(null);
@@ -144,7 +144,8 @@ export default function Contact() {
         </div>
       )}
 
-      <StickerCursorTrail containerRef={containerRef} />
+      {/* Skipper UI kinetic cursor line trail active strictly inside Contact section */}
+      <CursorTrail containerRef={containerRef} />
     </section>
   );
 }

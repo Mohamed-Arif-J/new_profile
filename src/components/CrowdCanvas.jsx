@@ -1,21 +1,6 @@
 import { gsap } from 'gsap';
 import React, { useEffect, useRef } from 'react';
 
-// Two-tone palettes used to tint each peep in dark mode.
-// `ink` replaces the black line-art / dark clothing, `fill` replaces the white areas.
-const DARK_PALETTE = [
-  { ink: [139, 92, 246], fill: [254, 243, 199] }, // violet + cream
-  { ink: [6, 182, 212], fill: [255, 228, 230] }, // cyan + blush
-  { ink: [236, 72, 153], fill: [224, 242, 254] }, // pink + sky
-  { ink: [249, 115, 22], fill: [236, 252, 203] }, // orange + lime
-  { ink: [16, 185, 129], fill: [254, 249, 195] }, // emerald + butter
-  { ink: [59, 130, 246], fill: [255, 237, 213] }, // blue + peach
-  { ink: [234, 179, 8], fill: [237, 233, 254] }, // amber + lavender
-  { ink: [239, 68, 68], fill: [204, 251, 241] }, // red + mint
-  { ink: [20, 184, 166], fill: [252, 231, 243] }, // teal + rose
-  { ink: [168, 85, 247], fill: [220, 252, 231] }, // purple + green
-];
-
 const CrowdCanvas = ({
   src = '/images/peeps/all-peeps.png',
   rows = 15,
@@ -138,12 +123,12 @@ const CrowdCanvas = ({
           peep.height = r[3];
           peep.drawArgs = [peep.image, ...r, 0, 0, peep.width, peep.height];
         },
-        render: (c, source) => {
+        render: (c) => {
           c.save();
           c.translate(peep.x, peep.y);
           c.scale(peep.scaleX * (peep.baseScale || 1), peep.baseScale || 1);
           c.drawImage(
-            source || peep.image,
+            peep.image,
             peep.rect[0],
             peep.rect[1],
             peep.rect[2],
@@ -166,66 +151,6 @@ const CrowdCanvas = ({
     const allPeeps = [];
     const availablePeeps = [];
     const crowd = [];
-    let colorSprite = null;
-    let currentSource = img;
-    let loaded = false;
-
-    const isDarkTheme = () =>
-      document.documentElement.getAttribute('data-theme') === 'dark';
-
-    // Builds a tinted copy of the sprite sheet: every peep cell gets its own palette,
-    // mapping luminance (black -> ink, white -> fill) while preserving alpha.
-    const buildColorSprite = () => {
-      const { naturalWidth: w, naturalHeight: h } = img;
-      const off = document.createElement('canvas');
-      off.width = w;
-      off.height = h;
-      const octx = off.getContext('2d', { willReadFrequently: true });
-      if (!octx) return img;
-      octx.drawImage(img, 0, 0);
-
-      let imageData;
-      try {
-        imageData = octx.getImageData(0, 0, w, h);
-      } catch {
-        return img;
-      }
-
-      const { rows: r, cols: c } = config;
-      const cellW = w / r;
-      const cellH = h / c;
-      const cellPalette = Array.from(
-        { length: r * c },
-        (_, i) => DARK_PALETTE[(i * 7 + ((i / r) | 0) * 3) % DARK_PALETTE.length],
-      );
-
-      const data = imageData.data;
-      for (let y = 0; y < h; y++) {
-        const rowOffset = Math.min(c - 1, (y / cellH) | 0) * r;
-        for (let x = 0; x < w; x++) {
-          const idx = (y * w + x) * 4;
-          if (data[idx + 3] === 0) continue;
-          const p = cellPalette[rowOffset + Math.min(r - 1, (x / cellW) | 0)];
-          const l = (data[idx] * 0.299 + data[idx + 1] * 0.587 + data[idx + 2] * 0.114) / 255;
-          data[idx] = p.ink[0] + (p.fill[0] - p.ink[0]) * l;
-          data[idx + 1] = p.ink[1] + (p.fill[1] - p.ink[1]) * l;
-          data[idx + 2] = p.ink[2] + (p.fill[2] - p.ink[2]) * l;
-        }
-      }
-
-      octx.putImageData(imageData, 0, 0);
-      return off;
-    };
-
-    const applyTheme = () => {
-      if (!loaded) return;
-      if (isDarkTheme()) {
-        if (!colorSprite) colorSprite = buildColorSprite();
-        currentSource = colorSprite;
-      } else {
-        currentSource = img;
-      }
-    };
 
     const createPeeps = () => {
       const { rows: r, cols: c } = config;
@@ -298,7 +223,7 @@ const CrowdCanvas = ({
       ctx.scale(dpr, dpr);
 
       crowd.forEach((peep) => {
-        peep.render(ctx, currentSource);
+        peep.render(ctx);
       });
 
       ctx.restore();
@@ -324,9 +249,7 @@ const CrowdCanvas = ({
     };
 
     const init = () => {
-      loaded = true;
       createPeeps();
-      applyTheme();
       resize();
       gsap.ticker.add(render);
     };
@@ -337,14 +260,7 @@ const CrowdCanvas = ({
     const handleResize = () => resize();
     window.addEventListener('resize', handleResize);
 
-    const themeObserver = new MutationObserver(applyTheme);
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
     return () => {
-      themeObserver.disconnect();
       window.removeEventListener('resize', handleResize);
       gsap.ticker.remove(render);
       crowd.forEach((peep) => {

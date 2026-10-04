@@ -1,86 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#140202"/>
-      <stop offset="1" stop-color="#2a0606"/>
-    </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f59e0b"/>
-      <stop offset="1" stop-color="#fbbf24"/>
-    </linearGradient>
-  </defs>
-
-  <style>
-    .ui{font-family:'Segoe UI',Tahoma,sans-serif}
-    .serif{font-family:Georgia,serif}
-    .steam-rise{animation:steamUp 3s ease-in-out infinite alternate}
-    @keyframes steamUp{from{transform:translateY(0) scaleY(0.9);opacity:0.4}to{transform:translateY(-14px) scaleY(1.1);opacity:0.9}}
-  </style>
-
-  <rect width="800" height="480" fill="url(#bg)"/>
-
-  <!-- Main Luxury Restaurant Shell -->
-  <g transform="translate(30, 25)">
-    <rect width="740" height="430" rx="14" fill="#1f0505" stroke="#ef4444" stroke-opacity="0.3" stroke-width="2"/>
-
-    <!-- Navbar -->
-    <rect width="740" height="52" rx="14" fill="#300808"/>
-    <text x="32" y="33" class="serif" font-size="20" font-weight="bold" fill="url(#gold)" letter-spacing="2">
-      SAVORIA
-    </text>
-    <text x="380" y="32" class="ui" font-size="12" fill="#fecaca">
-      Menu    Chef's Table    Wine Cellar    Reservations
-    </text>
-    <rect x="620" y="12" width="100" height="28" rx="14" fill="url(#gold)"/>
-    <text x="670" y="30" class="ui" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Book Table</text>
-
-    <!-- Dish Showcase -->
-    <g transform="translate(80, 160)">
-      <!-- Cloche / Plate -->
-      <ellipse cx="140" cy="120" rx="90" ry="24" fill="#180404" stroke="#e11d48" stroke-width="2"/>
-      <ellipse cx="140" cy="115" rx="72" ry="18" fill="#450a0a"/>
-      <!-- Gourmet Dish -->
-      <circle cx="140" cy="110" r="28" fill="#b91c1c"/>
-      <circle cx="152" cy="104" r="8" fill="#22c55e"/>
-      <circle cx="132" cy="114" r="6" fill="#f59e0b"/>
-
-      <!-- Rising Steam -->
-      <g class="steam-rise" stroke="#fbbf24" stroke-width="2" fill="none" opacity="0.6">
-        <path d="M125 90 Q120 70 128 50 Q136 30 126 10"/>
-        <path d="M142 90 Q148 70 140 50 Q132 30 144 10"/>
-        <path d="M158 90 Q152 70 160 50 Q168 30 156 10"/>
-      </g>
-    </g>
-
-    <!-- Typography & Story -->
-    <g transform="translate(360, 105)">
-      <text x="0" y="30" class="serif" font-size="34" font-weight="bold" fill="#ffffff">
-        Culinary Artistry
-      </text>
-      <text x="0" y="65" class="serif" font-size="34" font-weight="bold" fill="url(#gold)">
-        Meets Modern Design.
-      </text>
-      <text x="0" y="105" class="ui" font-size="13" fill="#fca5a5" width="340">
-        Experience artisanal flavors crafted with Michelin-star precision.
-      </text>
-      <text x="0" y="125" class="ui" font-size="13" fill="#fca5a5">
-        From farm-to-table ingredients to curated vintage pairings.
-      </text>
-
-      <!-- Signature Quote -->
-      <rect x="0" y="155" width="320" height="52" rx="8" fill="#360a0a" stroke="#ef4444" stroke-width="1"/>
-      <text x="16" y="176" class="ui" font-size="11" font-weight="bold" fill="url(#gold)">
-        Chef's Special: Smoked Truffle Confit
-      </text>
-      <text x="16" y="194" class="ui" font-size="10" fill="#cbd5e1">
-        Available exclusively for the Autumn 2026 tasting menu
-      </text>
-    </g>
-
-    <!-- Bottom Banner -->
-    <rect x="24" y="360" width="692" height="46" rx="8" fill="#300808"/>
-    <text x="370" y="388" class="ui" font-size="12" fill="#fecaca" text-anchor="middle">
-      High-Conversion Landing Page Experience • Responsive UI Patterns • Smooth Interactions
-    </text>
-  </g>
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#190909"/>
+  <rect x="90" y="80" width="1020" height="560" rx="32" fill="#2a1010" stroke="#ef4444" stroke-opacity=".38"/>
+  <circle cx="382" cy="314" r="146" fill="#fee2e2"/>
+  <circle cx="382" cy="314" r="108" fill="#ef4444" fill-opacity=".18"/>
+  <path d="M322 314c36-54 86-54 122 0M336 374h92" stroke="#991b1b" stroke-width="18" stroke-linecap="round"/>
+  <rect x="616" y="188" width="330" height="46" rx="12" fill="#fecaca"/>
+  <rect x="616" y="284" width="400" height="46" rx="12" fill="#fecaca"/>
+  <rect x="616" y="380" width="280" height="46" rx="12" fill="#fecaca"/>
+  <rect x="616" y="490" width="190" height="56" rx="28" fill="#ef4444"/>
+  <text x="92" y="676" fill="#fecaca" font-family="Arial, sans-serif" font-size="26" font-weight="700">SAVORIA</text>
 </svg>

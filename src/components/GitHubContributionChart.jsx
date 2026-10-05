@@ -126,10 +126,12 @@ export default function GitHubContributionChart() {
   const [selectedYear, setSelectedYear] = useState(2026);
   const [hoveredCell, setHoveredCell] = useState(null);
 
-  // Background fetch live data from public GitHub contributions API
+  // Background fetch live data from public GitHub contributions API with cache-busting
   useEffect(() => {
     let isMounted = true;
-    fetch('https://github-contributions-api.jogruber.de/v4/Mohamed-Arif-J?y=all')
+    fetch(`https://github-contributions-api.jogruber.de/v4/Mohamed-Arif-J?y=all&t=${Date.now()}`, {
+      cache: 'no-store',
+    })
       .then((res) => {
         if (!res.ok) throw new Error('API fetch failed');
         return res.json();

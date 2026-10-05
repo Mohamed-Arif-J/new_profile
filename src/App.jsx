@@ -208,7 +208,7 @@ export default function App() {
         <main>
           <Hero lenis={lenisInstance} />
           <About />
-          <Projects lenis={lenisInstance} />
+          <Projects lenis={lenisInstance} theme={theme} />
           <Skills />
           <Education />
           <Contact />

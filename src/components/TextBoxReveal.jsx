@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const HIGHLIGHT_WORDS = new Set([
@@ -45,7 +45,6 @@ function EditorialWord({ word, progress, index, total, isHighlight }) {
   );
 
   // Progressive grayscale transition:
-  // State 1: very light gray -> State 2: medium gray -> State 3: dark charcoal gray
   const placeholderBg = useTransform(
     progress,
     [approachStart, approachMid, start],
@@ -79,6 +78,17 @@ function EditorialWord({ word, progress, index, total, isHighlight }) {
 
 export default function TextBoxReveal({ paragraphs, className = '' }) {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 85%', 'end 30%'],
@@ -102,6 +112,32 @@ export default function TextBoxReveal({ paragraphs, className = '' }) {
   }, [paragraphs]);
 
   const total = wordsList.length || 1;
+
+  if (isMobile) {
+    return (
+      <div ref={containerRef} className={`editorial-reveal-container ${className}`}>
+        {paragraphs.map((p, pIdx) => {
+          const words = p.split(/\s+/).filter(Boolean);
+          return (
+            <p key={pIdx} className="editorial-reveal-paragraph">
+              {words.map((w, wIdx) => {
+                const clean = w.toLowerCase().replace(/[^a-z0-9-]/g, '');
+                const isHighlight = HIGHLIGHT_WORDS.has(clean);
+                return (
+                  <span
+                    key={wIdx}
+                    className={`editorial-word-text ${isHighlight ? 'editorial-highlight' : ''}`}
+                  >
+                    {w}{' '}
+                  </span>
+                );
+              })}
+            </p>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className={`editorial-reveal-container ${className}`}>

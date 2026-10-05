@@ -15,7 +15,7 @@ export default function About() {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return undefined;
+    if (!container || window.innerWidth <= 768) return undefined;
 
     const cards = container.querySelectorAll('.focus-card');
 

@@ -77,28 +77,37 @@ export default function Project3DOverview({
   const getThemePalette = useCallback((isDark) => {
     if (isDark) {
       return {
-        gridMain: 0x334155, // Subtle slate line
+        gridMain: 0x334155, // Crisp slate 700 line
         gridSub: 0x1e293b,  // Dark slate line
-        cubeBody: 0x94a3b8, // Light muted slate
-        cubeEdges: 0xe2e8f0, // Crisp off-white edges
-        cubeHover: 0xf1f5f9, // Bright off-white hover
+        cubeBody: 0x64748b, // Sophisticated architectural slate
+        cubeEdges: 0xffffff, // Brilliant crisp white wireframe border
+        edgesOpacity: 0.88,
+        cubeHover: 0x38bdf8, // Electric cyan accent
         lightAmbient: 0xffffff,
         ambientIntensity: 0.75,
         lightDir: 0xffffff,
-        dirIntensity: 1.2,
+        dirIntensity: 1.25,
+        shadowColor: 0x000000,
+        shadowOpacity: 0.45,
       };
     }
-    // Light mode
+    // Light mode: Sculpted architectural slate with sharp white borders and grounded contact shadows
+    // Under directional light (-12, 18, 12), the top face highlights to luminous silver-slate (~#a8b7c7),
+    // front face is mid slate (~#566575), side face is shaded (~#33404e),
+    // and pure white borders (0xffffff at 1.0 opacity) crisply outline every single edge!
     return {
-      gridMain: 0x94a3b8, // Subtle cool gray
-      gridSub: 0xe2e8f0,  // Soft crisp line
-      cubeBody: 0x1e293b, // Deep dark slate / charcoal
-      cubeEdges: 0x0f172a, // Near-black crisp edges
-      cubeHover: 0x0284c7, // Accent slate/cyan highlight
+      gridMain: 0x94a3b8, // Crisp cool gray line
+      gridSub: 0xe2e8f0,  // Soft line
+      cubeBody: 0x566575, // Sleek architectural slate (high contrast, distinct faces, beautiful lighting)
+      cubeEdges: 0xffffff, // Pure crisp white border outlining every edge
+      edgesOpacity: 1.0,
+      cubeHover: 0x0284c7, // Accent cyan highlight
       lightAmbient: 0xffffff,
       ambientIntensity: 0.9,
       lightDir: 0xffffff,
-      dirIntensity: 1.35,
+      dirIntensity: 1.4,
+      shadowColor: 0x0f172a,
+      shadowOpacity: 0.28,
     };
   }, []);
 
@@ -116,10 +125,27 @@ export default function Project3DOverview({
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    // 2. Camera with isometric perspective
-    // Looking down at the grid plane at ~32 degrees angle
+    // 2. Camera with isometric perspective & responsive FOV
+    // Automatically frames all 12 cubes on mobile and desktop
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
-    camera.position.set(0, 11, 15);
+    const updateCameraForViewport = (w, h) => {
+      const isNarrow = w < 768;
+      const isVerySmall = w < 480;
+
+      if (isVerySmall) {
+        camera.fov = 56;
+        camera.position.set(0, 13.5, 18.5);
+      } else if (isNarrow) {
+        camera.fov = 50;
+        camera.position.set(0, 12.5, 17);
+      } else {
+        camera.fov = 40;
+        camera.position.set(0, 11, 15);
+      }
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+    updateCameraForViewport(width, height);
     camera.lookAt(0, 0, -0.5);
     cameraRef.current = camera;
 
@@ -154,7 +180,7 @@ export default function Project3DOverview({
     lightsRef.current = { ambient: ambientLight, dir: dirLight, fill: fillLight };
 
     // 5. 3D Perspective Grid
-    // We create custom grid lines converging naturally into depth
+    // Custom grid lines converging naturally into depth
     const gridGroup = new THREE.Group();
     const GRID_SIZE = 14;
     const GRID_DIVISIONS = 14;
@@ -185,6 +211,20 @@ export default function Project3DOverview({
     gridLinesRef.current = gridLines;
     gridHelperRef.current = gridGroup;
 
+    // 5b. Smooth Radial Contact Shadow Texture
+    const shadowCanvas = document.createElement('canvas');
+    shadowCanvas.width = 64;
+    shadowCanvas.height = 64;
+    const sCtx = shadowCanvas.getContext('2d');
+    const sGrad = sCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
+    sGrad.addColorStop(0, 'rgba(0, 0, 0, 0.45)');
+    sGrad.addColorStop(0.4, 'rgba(0, 0, 0, 0.22)');
+    sGrad.addColorStop(0.8, 'rgba(0, 0, 0, 0.06)');
+    sGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    sCtx.fillStyle = sGrad;
+    sCtx.fillRect(0, 0, 64, 64);
+    const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+
     // 6. Interactive 3D Cubes
     const cubeMeshes = [];
     cubeMeshesRef.current = cubeMeshes;
@@ -197,27 +237,44 @@ export default function Project3DOverview({
       // Cube geometry
       const geometry = new THREE.BoxGeometry(layout.w, layout.h, layout.d);
 
-      // Cube material with slight metalness and smooth roughness for realistic light response
+      // Cube material with polygon offset to ensure edge lines NEVER get z-fighting
       const material = new THREE.MeshStandardMaterial({
         color: palette.cubeBody,
-        roughness: 0.38,
-        metalness: 0.15,
+        roughness: 0.35,
+        metalness: 0.12,
         flatShading: false,
+        polygonOffset: true,
+        polygonOffsetFactor: 1,
+        polygonOffsetUnits: 1,
       });
 
       const mesh = new THREE.Mesh(geometry, material);
       const baseY = layout.h / 2;
       mesh.position.set(layout.gridX, baseY, layout.gridZ);
 
-      // Edge outline for architectural wireframe touch
+      // Razor-sharp architectural wireframe border outlining every edge
       const edgesGeom = new THREE.EdgesGeometry(geometry);
       const edgesMat = new THREE.LineBasicMaterial({
         color: palette.cubeEdges,
         transparent: true,
-        opacity: isDark ? 0.45 : 0.35,
+        opacity: palette.edgesOpacity,
+        depthTest: true,
       });
       const edgesLine = new THREE.LineSegments(edgesGeom, edgesMat);
       mesh.add(edgesLine);
+
+      // Contact shadow disc on ground plane
+      const shadowGeom = new THREE.PlaneGeometry(layout.w * 1.5, layout.d * 1.5);
+      const shadowMat = new THREE.MeshBasicMaterial({
+        map: shadowTexture,
+        transparent: true,
+        opacity: palette.shadowOpacity,
+        depthWrite: false,
+      });
+      const shadowMesh = new THREE.Mesh(shadowGeom, shadowMat);
+      shadowMesh.rotation.x = -Math.PI / 2;
+      shadowMesh.position.set(layout.gridX, 0.015, layout.gridZ);
+      scene.add(shadowMesh);
 
       // Metadata for animations
       mesh.userData = {
@@ -230,6 +287,7 @@ export default function Project3DOverview({
         targetRotY: 0,
         edgesLine,
         material,
+        shadowMesh,
       };
 
       scene.add(mesh);
@@ -241,8 +299,7 @@ export default function Project3DOverview({
       if (!container || !renderer || !camera) return;
       const w = container.clientWidth || 800;
       const h = container.clientHeight || 650;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
+      updateCameraForViewport(w, h);
       renderer.setSize(w, h);
     };
 
@@ -291,6 +348,15 @@ export default function Project3DOverview({
 
         // Rotation
         mesh.rotation.y += (ud.targetRotY - mesh.rotation.y) * 0.1;
+
+        // Ground contact shadow response
+        if (ud.shadowMesh) {
+          const elev = Math.max(0, mesh.position.y - ud.baseY);
+          const s = 1 + elev * 0.25;
+          ud.shadowMesh.scale.set(s, s, s);
+          const baseOp = isDark ? 0.45 : 0.25;
+          ud.shadowMesh.material.opacity = baseOp / (1 + elev * 1.1);
+        }
       }
 
       renderer.render(scene, camera);
@@ -311,9 +377,14 @@ export default function Project3DOverview({
           mesh.userData.edgesLine.geometry.dispose();
           mesh.userData.edgesLine.material.dispose();
         }
+        if (mesh.userData.shadowMesh) {
+          mesh.userData.shadowMesh.geometry.dispose();
+          mesh.userData.shadowMesh.material.dispose();
+        }
       });
       gridGeometry.dispose();
       gridMaterial.dispose();
+      shadowTexture.dispose();
       renderer.dispose();
     };
   }, [projects, cubeLayouts, getThemePalette, isMobile]);
@@ -343,7 +414,10 @@ export default function Project3DOverview({
       }
       if (mesh.userData?.edgesLine?.material) {
         mesh.userData.edgesLine.material.color.setHex(palette.cubeEdges);
-        mesh.userData.edgesLine.material.opacity = isDark ? 0.45 : 0.35;
+        mesh.userData.edgesLine.material.opacity = palette.edgesOpacity;
+      }
+      if (mesh.userData?.shadowMesh?.material) {
+        mesh.userData.shadowMesh.material.opacity = palette.shadowOpacity;
       }
     });
   }, [theme, getThemePalette]);
@@ -384,6 +458,9 @@ export default function Project3DOverview({
                 prev.userData.targetScale = 1;
                 prev.userData.targetRotY = 0;
                 prev.userData.material.emissive?.setHex(0x000000);
+                const isDark = theme === 'dark' || document.documentElement.getAttribute('data-theme') === 'dark';
+                const palette = getThemePalette(isDark);
+                prev.userData.edgesLine?.material.color.setHex(palette.cubeEdges);
               }
             }
 
@@ -394,7 +471,8 @@ export default function Project3DOverview({
             hitMesh.userData.targetRotY = 0.08;
 
             const isDark = theme === 'dark' || document.documentElement.getAttribute('data-theme') === 'dark';
-            hitMesh.userData.material.emissive?.setHex(isDark ? 0x222a36 : 0x0f172a);
+            hitMesh.userData.material.emissive?.setHex(isDark ? 0x222a36 : 0x1e293b);
+            hitMesh.userData.edgesLine?.material.color.setHex(isDark ? 0xffffff : 0x38bdf8);
 
             setHoveredProject(hitMesh.userData.project);
             container.style.cursor = 'pointer';
@@ -414,6 +492,9 @@ export default function Project3DOverview({
               prev.userData.targetScale = 1;
               prev.userData.targetRotY = 0;
               prev.userData.material.emissive?.setHex(0x000000);
+              const isDark = theme === 'dark' || document.documentElement.getAttribute('data-theme') === 'dark';
+              const palette = getThemePalette(isDark);
+              prev.userData.edgesLine?.material.color.setHex(palette.cubeEdges);
             }
             hoveredCubeIndexRef.current = -1;
             setHoveredProject(null);
@@ -422,7 +503,7 @@ export default function Project3DOverview({
         }
       }
     },
-    [isMobile, theme]
+    [isMobile, theme, getThemePalette]
   );
 
   const handlePointerLeave = useCallback(() => {
@@ -434,12 +515,15 @@ export default function Project3DOverview({
         prev.userData.targetScale = 1;
         prev.userData.targetRotY = 0;
         prev.userData.material.emissive?.setHex(0x000000);
+        const isDark = theme === 'dark' || document.documentElement.getAttribute('data-theme') === 'dark';
+        const palette = getThemePalette(isDark);
+        prev.userData.edgesLine?.material.color.setHex(palette.cubeEdges);
       }
       hoveredCubeIndexRef.current = -1;
       setHoveredProject(null);
     }
     if (mountRef.current) mountRef.current.style.cursor = 'default';
-  }, []);
+  }, [theme, getThemePalette]);
 
   // Click cube to select project
   const handleClick = useCallback(
@@ -466,6 +550,33 @@ export default function Project3DOverview({
     [onSelectProject]
   );
 
+  // Mobile Touch Support: Tap cube to select project
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (!e.changedTouches || e.changedTouches.length === 0) return;
+      const touch = e.changedTouches[0];
+      const container = mountRef.current;
+      if (!container || !cameraRef.current) return;
+
+      const rect = container.getBoundingClientRect();
+      const nx = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = -(((touch.clientY - rect.top) / rect.height) * 2 - 1);
+
+      const raycaster = raycasterRef.current;
+      raycaster.setFromCamera({ x: nx, y: ny }, cameraRef.current);
+      const intersects = raycaster.intersectObjects(cubeMeshesRef.current, false);
+
+      if (intersects.length > 0) {
+        const hit = intersects[0].object;
+        const project = hit.userData?.project;
+        if (project && onSelectProject) {
+          onSelectProject(project.id);
+        }
+      }
+    },
+    [onSelectProject]
+  );
+
   return (
     <motion.div
       className="project-3d-overview-root"
@@ -476,6 +587,7 @@ export default function Project3DOverview({
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onClick={handleClick}
+      onTouchEnd={handleTouchEnd}
       aria-label="Interactive 3D overview of projects"
     >
       {/* 3D WebGL Canvas Mount Container */}
@@ -526,7 +638,9 @@ export default function Project3DOverview({
         <div className="overview-prompt-pill">
           <span className="overview-prompt-pulse" />
           <span className="overview-prompt-text">
-            Click any block or select from the index to explore architecture
+            {isMobile
+              ? 'Tap any block or tab to explore architecture'
+              : 'Click any block or select from the index to explore architecture'}
           </span>
         </div>
       </div>

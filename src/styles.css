@@ -3183,6 +3183,84 @@ main {
     color: var(--muted);
     font-weight: 600;
   }
+
+  /* Mobile 3D Perspective Stage Container */
+  .mobile-3d-stage-wrap {
+    width: 100%;
+    height: clamp(380px, 50vh, 500px);
+    min-height: 380px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    position: relative;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+  }
+
+  .mobile-3d-stage-wrap .project-3d-overview-root {
+    min-height: 380px;
+    height: 100%;
+  }
+
+  .mobile-reset-overview-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 100px;
+    background: var(--panel);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-reset-overview-btn:hover {
+    background: var(--bg-card);
+    border-color: var(--ink);
+  }
+
+  /* 3D Overview Mobile Overrides */
+  .project-3d-overview-root {
+    min-height: 380px;
+  }
+
+  .overview-hud-header {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .overview-hud-pill {
+    padding: 4px 10px;
+    font-size: 0.62rem;
+  }
+
+  .overview-hud-coords {
+    display: none;
+  }
+
+  .overview-bottom-prompt {
+    bottom: 12px;
+    max-width: 92%;
+  }
+
+  .overview-prompt-pill {
+    padding: 6px 14px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }
 
 

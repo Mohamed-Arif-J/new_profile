@@ -36,6 +36,7 @@ export default function Navbar({ lenis, theme, toggleTheme }) {
 
     if (open) {
       document.body.style.overflow = 'hidden';
+      if (lenis) lenis.stop();
       gsap.to(overlayRef.current, {
         clipPath: 'circle(150% at calc(100% - 50px) 40px)',
         duration: 0.75,
@@ -56,17 +57,19 @@ export default function Navbar({ lenis, theme, toggleTheme }) {
       );
     } else {
       document.body.style.overflow = '';
+      if (lenis) lenis.start();
       gsap.to(overlayRef.current, {
         clipPath: 'circle(0% at calc(100% - 50px) 40px)',
         duration: 0.55,
         ease: 'power3.inOut',
       });
     }
-  }, [open]);
+  }, [open, lenis]);
 
   const navigateTo = (e, targetHref) => {
     e.preventDefault();
     setOpen(false);
+    if (lenis) lenis.start();
     const targetEl = document.querySelector(targetHref);
     if (!targetEl) return;
 
@@ -120,7 +123,7 @@ export default function Navbar({ lenis, theme, toggleTheme }) {
       </header>
 
       {/* Full-Screen Overlay Menu (Lando Norris Inspired) */}
-      <div className="lando-menu-overlay" ref={overlayRef}>
+      <div className="lando-menu-overlay" ref={overlayRef} data-lenis-prevent="true">
         <nav className="lando-menu-content">
           {allLinks.map((item, i) => {
             const sectionId = item.href.replace('#', '');

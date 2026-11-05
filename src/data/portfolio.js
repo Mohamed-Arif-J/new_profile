@@ -18,7 +18,7 @@ export const portfolio = {
   ],
   metrics: [
     { value: 9.47, isFloat: true, label: 'Current CGPA', suffix: '' },
-    { value: 12, isFloat: false, label: 'Selected Projects', suffix: '+' },
+    { value: 13, isFloat: false, label: 'Selected Projects', suffix: '+' },
     { value: 9.7, isFloat: true, label: 'HSC Grade', suffix: '' },
   ],
   about: {
@@ -50,6 +50,25 @@ export const portfolio = {
     },
   ],
   projects: [
+    {
+      id: 'shadow-db',
+      title: 'ShadowDB',
+      tagline: 'AI Text-to-SQL Studio & WASM Sandbox',
+      image: '/assets/projects/shadow-db.svg',
+      accent: '#00f0ff',
+      accentClass: 'accent-cyan',
+      category: 'AI & Database Systems',
+      features: [
+        'AI-driven Natural Language Text-to-SQL studio with local fine-tuned Qwen 2.5 Coder 7B inference via Ollama.',
+        'Dual-engine WebAssembly SQLite sandbox (sql.js) dry-running queries to isolate mutations before production commit.',
+        'Git-style database snapshot versioning, AST safety guardrails against destructive operations, and 1-click state rollback.',
+      ],
+      tech: ['React 19', 'SQLite WASM', 'Qwen 2.5 Coder', 'Ollama', 'WebAssembly', 'Tailwind CSS', 'IndexedDB'],
+      links: [
+        { label: 'Source', href: 'https://github.com/Mohamed-Arif-J/shadow_db', type: 'github' },
+        { label: 'Model Weights', href: 'https://drive.google.com/file/d/1GRxV7cIdVo3vaby-ZLVsBKwPBFMfKSPn/view?usp=sharing', type: 'download' },
+      ],
+    },
     {
       id: 'ai-image-detector',
       title: 'AI Image Detector',

@@ -93,7 +93,7 @@ function CentralIdleFigure({ mousePos, isMobile }) {
       <div className="idle-text-block">
         <span className="idle-eyebrow">
           <Sparkles size={13} className="idle-sparkle-icon" />
-          <span>PORTFOLIO EXHIBITION · 12 ARCHITECTURES</span>
+          <span>PORTFOLIO EXHIBITION · {portfolio.projects.length} ARCHITECTURES</span>
         </span>
         <h3 className="idle-main-title">Mohamed Arif J</h3>
         <p className="idle-tagline">
@@ -413,7 +413,7 @@ export default function Projects({ lenis, theme: propsTheme }) {
   // Check viewport responsiveness
   useEffect(() => {
     const checkViewport = () => {
-      setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 768);
+      setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 860);
     };
     checkViewport();
     window.addEventListener('resize', checkViewport);
@@ -557,7 +557,12 @@ export default function Projects({ lenis, theme: propsTheme }) {
           </div>
 
           <div className="nav-rail-scroller-wrap">
-            <nav className="nav-rail-list" ref={navRailListRef} role="tablist">
+            <nav
+              className="nav-rail-list"
+              ref={navRailListRef}
+              role="tablist"
+              data-lenis-prevent="true"
+            >
               {projectsList.map((p, idx) => {
                 const isSelected = selectedId === p.id;
                 const isHovered = hoveredId === p.id;
@@ -653,7 +658,7 @@ export default function Projects({ lenis, theme: propsTheme }) {
           ============================================================== */}
       <div className="editorial-mobile-showcase" aria-label="Mobile Project Showcase">
         {/* Horizontal Quick Select Tab Rail */}
-        <div className="mobile-tabs-scroller">
+        <div className="mobile-tabs-scroller" data-lenis-prevent="true">
           {/* Overview Return Tab */}
           <button
             type="button"

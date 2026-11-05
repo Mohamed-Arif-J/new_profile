@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import GradientMeshBg from './components/GradientMeshBg.jsx';
 import ScrollStroke from './components/ScrollStroke.jsx';
-import ScrollProgress003 from './components/ScrollProgress003.jsx';
 import ScrollControls from './components/ScrollControls.jsx';
 import SplashScreen from './components/SplashScreen.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -197,7 +196,6 @@ export default function App() {
       )}
       <GradientMeshBg />
       <StaircaseThemeTransition ref={transitionRef} onThemeSwitch={handleThemeSwitch} />
-      <ScrollProgress003 lenis={lenisInstance} />
       <ScrollControls lenis={lenisInstance} />
 
       <div className="app" style={{ opacity: 1 }}>

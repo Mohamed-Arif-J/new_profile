@@ -86,7 +86,7 @@ export default function Skills() {
         </div>
 
         <div className="skills-content">
-          <div className="category-filter-bar reveal-fade">
+          <div className="category-filter-bar reveal-fade" data-lenis-prevent="true">
             {categories.map((cat) => (
               <button
                 type="button"

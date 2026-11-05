@@ -198,7 +198,7 @@ export default function GitHubContributionChart() {
       </div>
 
       {/* Interactive Heatmap Scrollable Wrapper */}
-      <div className="gh-heatmap-scroll">
+      <div className="gh-heatmap-scroll" data-lenis-prevent="true">
         <div className="gh-heatmap-inner" style={{ minWidth: `${Math.max(540, currentData.weeks.length * 14 + 40)}px` }}>
           {/* Months header aligned by column position */}
           <div className="gh-months-row-rel">

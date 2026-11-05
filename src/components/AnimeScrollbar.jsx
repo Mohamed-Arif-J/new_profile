@@ -47,6 +47,16 @@ export default function AnimeScrollbar({ containerRef, items = [], activeIndex =
     };
   }, [containerRef, items]);
 
+  // Scroll active project item into view when activeIndex changes
+  useEffect(() => {
+    const container = containerRef?.current;
+    if (!container || activeIndex < 0) return;
+    const activeEl = container.children?.[activeIndex];
+    if (activeEl) {
+      activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [activeIndex, containerRef]);
+
   // Scroll container to a target progress (0 to 1)
   const scrollToRatio = useCallback(
     (ratio) => {

@@ -55,21 +55,22 @@ export default function Project3DOverview({
     }
   }, []);
 
-  // Carefully arranged 12 cube positions inspired by Skiper 36 (spread across a 12x12 grid)
+  // Carefully arranged 13 cube positions inspired by Skiper 36 (spread across the 14x14 grid)
   const cubeLayouts = useMemo(() => {
     return [
-      { gridX: -3.5, gridZ: -2.5, h: 1.3, w: 1.3, d: 1.3 }, // 01 AI Image Detector
-      { gridX: -1.2, gridZ: -3.2, h: 1.5, w: 1.4, d: 1.4 }, // 02 Counselling App
-      { gridX: 1.8,  gridZ: -3.0, h: 1.2, w: 1.3, d: 1.3 }, // 03 Caught in 4K
-      { gridX: 3.6,  gridZ: -1.8, h: 1.4, w: 1.4, d: 1.4 }, // 04 RageWare OS
-      { gridX: -4.0, gridZ: 0.2,  h: 1.2, w: 1.3, d: 1.3 }, // 05 NOBROWSE
-      { gridX: -1.8, gridZ: -0.5, h: 1.6, w: 1.5, d: 1.5 }, // 06 NaaS
-      { gridX: 0.8,  gridZ: -0.8, h: 1.3, w: 1.3, d: 1.3 }, // 07 Fake Review Detector
-      { gridX: 2.9,  gridZ: 0.5,  h: 1.5, w: 1.4, d: 1.4 }, // 08 Savoria
-      { gridX: -3.0, gridZ: 2.4,  h: 1.4, w: 1.4, d: 1.4 }, // 09 Screen Addiction
-      { gridX: -0.8, gridZ: 2.0,  h: 1.2, w: 1.3, d: 1.3 }, // 10 Smart Hostel
-      { gridX: 1.6,  gridZ: 2.2,  h: 1.5, w: 1.4, d: 1.4 }, // 11 Portfolio
-      { gridX: 3.8,  gridZ: 2.6,  h: 1.3, w: 1.3, d: 1.3 }, // 12 Smart Mirror
+      { gridX: -0.2, gridZ: 3.0,  h: 1.6, w: 1.5, d: 1.5 }, // 01 ShadowDB (Hero front focal block)
+      { gridX: -3.5, gridZ: -2.5, h: 1.3, w: 1.3, d: 1.3 }, // 02 AI Image Detector
+      { gridX: -1.2, gridZ: -3.2, h: 1.5, w: 1.4, d: 1.4 }, // 03 Counselling App
+      { gridX: 1.8,  gridZ: -3.0, h: 1.2, w: 1.3, d: 1.3 }, // 04 Caught in 4K
+      { gridX: 3.6,  gridZ: -1.8, h: 1.4, w: 1.4, d: 1.4 }, // 05 RageWare OS
+      { gridX: -4.0, gridZ: 0.2,  h: 1.2, w: 1.3, d: 1.3 }, // 06 NOBROWSE
+      { gridX: -1.8, gridZ: -0.5, h: 1.6, w: 1.5, d: 1.5 }, // 07 NaaS
+      { gridX: 0.8,  gridZ: -0.8, h: 1.3, w: 1.3, d: 1.3 }, // 08 Fake Review Detector
+      { gridX: 2.9,  gridZ: 0.5,  h: 1.5, w: 1.4, d: 1.4 }, // 09 Savoria
+      { gridX: -3.0, gridZ: 2.2,  h: 1.4, w: 1.4, d: 1.4 }, // 10 Screen Addiction
+      { gridX: -1.0, gridZ: 1.2,  h: 1.2, w: 1.3, d: 1.3 }, // 11 Smart Hostel
+      { gridX: 1.6,  gridZ: 1.8,  h: 1.5, w: 1.4, d: 1.4 }, // 12 Smart Attendance
+      { gridX: 3.8,  gridZ: 2.4,  h: 1.3, w: 1.3, d: 1.3 }, // 13 Rei AI Assistant
     ];
   }, []);
 
@@ -597,7 +598,7 @@ export default function Project3DOverview({
       <div className="overview-hud-header" aria-hidden="true">
         <div className="overview-hud-pill">
           <Compass size={13} className="overview-hud-icon" />
-          <span>3D PERSPECTIVE OVERVIEW · 12 ARCHITECTURES</span>
+          <span>3D PERSPECTIVE OVERVIEW · {projects.length || 13} ARCHITECTURES</span>
         </div>
         <div className="overview-hud-coords">
           <span>PLANE: 14×14</span>

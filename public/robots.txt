@@ -1,0 +1,11 @@
+# Robots.txt for Mohamed Arif J Portfolio
+# https://new-profile-liart.vercel.app/
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /images/
+
+# Sitemap Location
+Sitemap: https://new-profile-liart.vercel.app/sitemap.xml
+

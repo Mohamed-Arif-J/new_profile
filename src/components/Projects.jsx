@@ -4,6 +4,8 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   ExternalLink,
   Github,
   Download,
@@ -11,6 +13,8 @@ import {
   Layers,
   RotateCcw,
   Code2,
+  CheckCircle2,
+  Cpu,
 } from 'lucide-react';
 import { portfolio } from '../data/portfolio.js';
 import CursorTrail from './CursorTrail.jsx';
@@ -403,6 +407,30 @@ export default function Projects({ lenis, theme: propsTheme }) {
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobileFilter, setMobileFilter] = useState('All');
+  const [expandedCardId, setExpandedCardId] = useState(null);
+
+  const mobileCategories = useMemo(() => ['All', 'AI & ML', 'Web & UI', 'Systems & Mobile'], []);
+
+  const filteredMobileProjects = useMemo(() => {
+    if (mobileFilter === 'All') return projectsList;
+    if (mobileFilter === 'AI & ML') {
+      return projectsList.filter((p) =>
+        /AI|ML|Vision|Neural|Deep Learning|LLM/i.test(p.category)
+      );
+    }
+    if (mobileFilter === 'Web & UI') {
+      return projectsList.filter((p) =>
+        /Web|Full Stack|UI|Interface|Psychology/i.test(p.category)
+      );
+    }
+    if (mobileFilter === 'Systems & Mobile') {
+      return projectsList.filter((p) =>
+        /System|Database|Enterprise|Mobile/i.test(p.category)
+      );
+    }
+    return projectsList;
+  }, [projectsList, mobileFilter]);
 
   // Smooth mouse tracking for Layer 2 parallax (rAF loop with damping)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -653,133 +681,134 @@ export default function Projects({ lenis, theme: propsTheme }) {
       </div>
 
       {/* ==============================================================
-          MOBILE TOUCH-OPTIMIZED VIEW (< 768px)
-          Seamlessly transitions between the 3D Overview and Selected Project Card
+          MOBILE TOUCH-OPTIMIZED VIEW (< 860px)
+          Streamlined High-Performance Basic Cards with Expandable "Explore" Specs
+          (Completely eliminates bulky 3D WebGL interactions on mobile devices)
           ============================================================== */}
       <div className="editorial-mobile-showcase" aria-label="Mobile Project Showcase">
-        {/* Horizontal Quick Select Tab Rail */}
-        <div className="mobile-tabs-scroller" data-lenis-prevent="true">
-          {/* Overview Return Tab */}
-          <button
-            type="button"
-            className={`mobile-tab-pill ${!selectedId ? 'is-active' : ''}`}
-            onClick={() => {
-              setSelectedId(null);
-              setHoveredId(null);
-            }}
-          >
-            <RotateCcw size={12} />
-            <span>3D Overview</span>
-          </button>
+        {/* Category Filter Pills Bar */}
+        <div className="mobile-filter-bar" data-lenis-prevent="true">
+          {mobileCategories.map((cat) => {
+            const count =
+              cat === 'All'
+                ? projectsList.length
+                : cat === 'AI & ML'
+                ? projectsList.filter((p) => /AI|ML|Vision|Neural|Deep Learning|LLM/i.test(p.category)).length
+                : cat === 'Web & UI'
+                ? projectsList.filter((p) => /Web|Full Stack|UI|Interface|Psychology/i.test(p.category)).length
+                : projectsList.filter((p) => /System|Database|Enterprise|Mobile/i.test(p.category)).length;
 
-          {projectsList.map((p, idx) => {
-            const isCur = selectedId === p.id;
             return (
               <button
-                key={p.id}
+                key={cat}
                 type="button"
-                className={`mobile-tab-pill ${isCur ? 'is-active' : ''}`}
-                onClick={() => setSelectedId(isCur ? null : p.id)}
-                style={{
-                  borderColor: isCur ? p.accent : undefined,
-                  color: isCur ? p.accent : undefined,
-                }}
+                className={`mobile-filter-pill ${mobileFilter === cat ? 'is-active' : ''}`}
+                onClick={() => setMobileFilter(cat)}
               >
-                <span>{String(idx + 1).padStart(2, '0')}</span>
-                <span>{p.title}</span>
+                <span>{cat}</span>
+                <span className="mobile-filter-badge">{count}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Dynamic Mobile Display: 3D Perspective Overview vs Active Project Card */}
-        <AnimatePresence mode="wait">
-          {!selectedId ? (
-            <motion.div
-              key="mobile-3d-wrapper"
-              className="mobile-3d-stage-wrap"
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Project3DOverview
-                projects={projectsList}
-                onSelectProject={handleSelectProject}
-                theme={currentTheme}
-                isMobile={true}
-              />
-            </motion.div>
-          ) : (
-            (() => {
-              const cur = activeProject || projectsList[0];
-              const curIdx = projectsList.findIndex((p) => p.id === cur.id);
-              const liveLink = cur.links?.find((l) => l.type === 'external');
-              const sourceLink = cur.links?.find((l) => l.type === 'github');
+        {/* Basic Cards Feed */}
+        <div className="mobile-cards-feed">
+          {filteredMobileProjects.map((p) => {
+            const isExpanded = expandedCardId === p.id;
+            const liveLink = p.links?.find((l) => l.type === 'external');
+            const sourceLink = p.links?.find((l) => l.type === 'github');
+            const downloadLink = p.links?.find((l) => l.type === 'download');
+            const originalIndex = projectsList.findIndex((item) => item.id === p.id);
 
-              return (
-                <motion.article
-                  key={cur.id}
-                  className="mobile-project-card"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <div className="mobile-card-media">
-                    <img
-                      src={cur.image}
-                      alt={cur.title}
-                      className="mobile-card-img"
-                      loading="lazy"
+            return (
+              <article
+                key={p.id}
+                className={`mobile-basic-card ${isExpanded ? 'is-expanded' : ''}`}
+                style={{
+                  '--card-accent': p.accent,
+                }}
+              >
+                {/* Media Header */}
+                <div className="mobile-basic-media">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="mobile-basic-img"
+                    loading="lazy"
+                  />
+                  <div
+                    className="mobile-basic-badge"
+                    style={{
+                      backgroundColor: `${p.accent}22`,
+                      borderColor: `${p.accent}55`,
+                      color: p.accent,
+                    }}
+                  >
+                    <span
+                      className="mobile-badge-dot"
+                      style={{ backgroundColor: p.accent }}
                     />
-                    <div
-                      className="mobile-card-badge"
-                      style={{
-                        backgroundColor: `${cur.accent}20`,
-                        borderColor: `${cur.accent}44`,
-                        color: cur.accent,
-                      }}
-                    >
-                      <span
-                        className="mobile-badge-dot"
-                        style={{ backgroundColor: cur.accent }}
-                      />
-                      <span>{cur.category}</span>
-                    </div>
-                    <span className="mobile-index-tag">
-                      {curIdx + 1} / {projectsList.length}
-                    </span>
+                    <span>{p.category}</span>
+                  </div>
+                  <span className="mobile-index-tag">
+                    {String(originalIndex + 1).padStart(2, '0')} / {String(projectsList.length).padStart(2, '0')}
+                  </span>
+                </div>
+
+                {/* Card Content */}
+                <div className="mobile-basic-body">
+                  <div className="mobile-basic-header">
+                    <h3 className="mobile-basic-title">{p.title}</h3>
+                    <p className="mobile-basic-tagline" style={{ color: p.accent }}>
+                      {p.tagline}
+                    </p>
                   </div>
 
-                  <div className="mobile-card-body">
-                    <h3 className="mobile-card-title">{cur.title}</h3>
-                    <p className="mobile-card-tagline">{cur.tagline}</p>
-                    <p className="mobile-card-desc">{cur.features?.[0]}</p>
+                  {/* Top Technology Pills */}
+                  <div className="mobile-basic-tags">
+                    {p.tech?.slice(0, 4).map((techName) => (
+                      <span key={techName} className="mobile-basic-tag">
+                        {techName}
+                      </span>
+                    ))}
+                    {p.tech?.length > 4 && (
+                      <span className="mobile-basic-tag more">
+                        +{p.tech.length - 4}
+                      </span>
+                    )}
+                  </div>
 
-                    <div className="mobile-tech-tags">
-                      {cur.tech?.slice(0, 4).map((t) => (
-                        <span key={t} className="mobile-tech-tag">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Summary Feature / Description */}
+                  <p className="mobile-basic-summary">
+                    {p.features?.[0] || 'High-performance architecture engineered with modern standards.'}
+                  </p>
 
-                    <div className="mobile-card-actions">
+                  {/* Action Bar: Direct Quick Links + Explore Toggle */}
+                  <div className="mobile-basic-action-bar">
+                    <button
+                      type="button"
+                      className={`mobile-explore-toggle-btn ${isExpanded ? 'is-open' : ''}`}
+                      onClick={() => setExpandedCardId(isExpanded ? null : p.id)}
+                      aria-expanded={isExpanded}
+                      aria-label={`${isExpanded ? 'Close' : 'Explore'} details for ${p.title}`}
+                    >
+                      <Sparkles size={14} className="explore-sparkle" />
+                      <span>{isExpanded ? 'Close Details' : 'Explore'}</span>
+                      {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                    </button>
+
+                    <div className="mobile-quick-links">
                       {liveLink && (
                         <a
                           href={liveLink.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="mobile-action-btn primary"
-                          style={{
-                            backgroundColor: cur.accent,
-                            borderColor: cur.accent,
-                            color: '#06080c',
-                          }}
+                          className="mobile-quick-btn live"
+                          title="View Live Application"
                         >
-                          <span>Live Project</span>
-                          <ExternalLink size={14} />
+                          <ExternalLink size={13} />
+                          <span>Demo</span>
                         </a>
                       )}
                       {sourceLink && (
@@ -787,57 +816,118 @@ export default function Projects({ lenis, theme: propsTheme }) {
                           href={sourceLink.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="mobile-action-btn secondary"
+                          className="mobile-quick-btn code"
+                          title="View Source Code on GitHub"
                         >
-                          <Github size={14} />
+                          <Github size={13} />
                           <span>Code</span>
                         </a>
                       )}
-                    </div>
-
-                    {/* Return to 3D Overview Button on Mobile */}
-                    <button
-                      type="button"
-                      className="mobile-reset-overview-btn"
-                      onClick={() => {
-                        setSelectedId(null);
-                        setHoveredId(null);
-                      }}
-                    >
-                      <RotateCcw size={13} />
-                      <span>Return to 3D Overview</span>
-                    </button>
-
-                    {/* Mobile Slider Controls */}
-                    <div className="mobile-slider-nav">
-                      <button
-                        type="button"
-                        className="mobile-nav-arrow"
-                        onClick={handleMobilePrev}
-                        aria-label="Previous project"
-                      >
-                        <ChevronLeft size={18} />
-                        <span>Prev</span>
-                      </button>
-                      <span className="mobile-slider-counter">
-                        {curIdx + 1} of {projectsList.length}
-                      </span>
-                      <button
-                        type="button"
-                        className="mobile-nav-arrow"
-                        onClick={handleMobileNext}
-                        aria-label="Next project"
-                      >
-                        <span>Next</span>
-                        <ChevronRight size={18} />
-                      </button>
+                      {downloadLink && (
+                        <a
+                          href={downloadLink.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mobile-quick-btn download"
+                          title="Download Application"
+                        >
+                          <Download size={13} />
+                          <span>App</span>
+                        </a>
+                      )}
                     </div>
                   </div>
-                </motion.article>
-              );
-            })()
-          )}
-        </AnimatePresence>
+
+                  {/* Expandable Architectural Specs & Details Drawer */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        className="mobile-explore-drawer"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <div className="drawer-inner-content">
+                          {/* Core Capabilities Checklist */}
+                          <div className="drawer-section">
+                            <span className="drawer-section-title">
+                              <Cpu size={13} />
+                              <span>Key Architecture Highlights</span>
+                            </span>
+                            <ul className="drawer-feature-list">
+                              {p.features?.map((feat, fIdx) => (
+                                <li key={fIdx} className="drawer-feature-item">
+                                  <CheckCircle2
+                                    size={13}
+                                    className="drawer-check-icon"
+                                    style={{ color: p.accent }}
+                                  />
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Complete Tech Stack Matrix */}
+                          <div className="drawer-section">
+                            <span className="drawer-section-title">
+                              <Code2 size={13} />
+                              <span>Full Technology Stack</span>
+                            </span>
+                            <div className="drawer-full-tech">
+                              {p.tech?.map((techName) => (
+                                <span
+                                  key={techName}
+                                  className="drawer-tech-pill"
+                                  style={{
+                                    borderColor: `${p.accent}50`,
+                                  }}
+                                >
+                                  {techName}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Deep Direct Actions */}
+                          <div className="drawer-actions-row">
+                            {liveLink && (
+                              <a
+                                href={liveLink.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="drawer-full-cta primary"
+                                style={{
+                                  backgroundColor: p.accent,
+                                  color: '#06080c',
+                                }}
+                              >
+                                <span>Launch {p.title}</span>
+                                <ExternalLink size={14} />
+                              </a>
+                            )}
+                            {sourceLink && (
+                              <a
+                                href={sourceLink.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="drawer-full-cta secondary"
+                              >
+                                <Github size={14} />
+                                <span>GitHub Repository</span>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
 
       {/* ==============================================================

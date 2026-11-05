@@ -7,7 +7,7 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://new-profile-liart.vercel.app/assets/projects/ai-image.png</image:loc>
+      <image:loc>https://new-profile-liart.vercel.app/og-image.png</image:loc>
       <image:title>Mohamed Arif J — Software Engineer and AI Systems Developer</image:title>
       <image:caption>Flagship portfolio showcasing ShadowDB, Deep Learning Vision models, and creative software architectures.</image:caption>
     </image:image>
